@@ -1,0 +1,134 @@
+{
+    "course_info": {
+        "course_code": "CSL601",
+        "course_name": "Data Warehousing and Mining",
+        "course_type": "theory",
+        "semester": "6",
+        "academic_year": "2025-26",
+        "faculty_name": "Prof. Maria D'Souza",
+        "faculty_designation": "Assistant Professor",
+        "branch": "Computer Engineering",
+        "division": "B",
+        "batches": [
+            "B1",
+            "B2",
+            "B3"
+        ]
+    },
+    "course_outcomes": [
+        {
+            "co_id": "CO1",
+            "statement": "Explain concepts of data warehousing, OLAP and data mining",
+            "blooms_level": 2
+        },
+        {
+            "co_id": "CO2",
+            "statement": "Apply preprocessing techniques on raw data for mining",
+            "blooms_level": 3
+        },
+        {
+            "co_id": "CO3",
+            "statement": "Implement classification and clustering algorithms",
+            "blooms_level": 3
+        },
+        {
+            "co_id": "CO4",
+            "statement": "Analyze association rules using Apriori and FP-Growth algorithms",
+            "blooms_level": 4
+        }
+    ],
+    "co_po_mapping": [],
+    "lesson_plan": [
+        {
+            "sr_no": 1,
+            "proposed_date": "2026-01-07",
+            "topic": "Introduction to Data Warehousing",
+            "mode": "Lecture",
+            "cos": "CO1",
+            "assessments": "",
+            "books": "1",
+            "actual_date": "2026-01-07"
+        },
+        {
+            "sr_no": 2,
+            "proposed_date": "2026-01-09",
+            "topic": "Data Warehouse Architecture",
+            "mode": "Lecture",
+            "cos": "CO1",
+            "assessments": "",
+            "books": "1",
+            "actual_date": "2026-01-09"
+        },
+        {
+            "sr_no": 3,
+            "proposed_date": "2026-01-14",
+            "topic": "OLAP Operations: Roll-up, Drill-down",
+            "mode": "Lecture",
+            "cos": "CO1",
+            "assessments": "",
+            "books": "1,2",
+            "actual_date": "2026-01-14"
+        },
+        {
+            "sr_no": 4,
+            "proposed_date": "2026-01-16",
+            "topic": "Data Mining Concepts and KDD Process",
+            "mode": "Lecture",
+            "cos": "CO1,CO2",
+            "assessments": "",
+            "books": "2",
+            "actual_date": "2026-01-16"
+        },
+        {
+            "sr_no": 5,
+            "proposed_date": "2026-01-21",
+            "topic": "Data Preprocessing: Cleaning and Integration",
+            "mode": "Lecture + Lab",
+            "cos": "CO2",
+            "assessments": "ISE1",
+            "books": "2",
+            "actual_date": "2026-01-21"
+        }
+    ],
+    "assessments": {
+        "ise1": [
+            {
+                "name": "Quiz on DW Concepts",
+                "date": "2026-01-21",
+                "max_marks": 10
+            }
+        ],
+        "ise2": [],
+        "tutorials": []
+    },
+    "recommended_books": [
+        {
+            "id": "1",
+            "title": "Data Warehousing Fundamentals",
+            "author": "Paulraj Ponniah",
+            "publisher": "Wiley",
+            "edition": "2nd Edition",
+            "type": "textbook"
+        },
+        {
+            "id": "2",
+            "title": "Data Mining: Concepts and Techniques",
+            "author": "Jiawei Han and Micheline Kamber",
+            "publisher": "Morgan Kaufmann",
+            "edition": "3rd Edition",
+            "type": "textbook"
+        },
+        {
+            "id": "3",
+            "title": "Introduction to Data Mining",
+            "author": "Pang-Ning Tan, Michael Steinbach",
+            "publisher": "Pearson",
+            "edition": "2nd Edition",
+            "type": "reference"
+        }
+    ],
+    "exit_survey": {
+        "questions": [],
+        "responses": []
+    }
+}

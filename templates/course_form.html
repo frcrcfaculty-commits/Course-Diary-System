@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if mode == 'new' %}Create{% else %}Edit{% endif %} Course - Course Diary System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('index') }}" class="logo">📚 Course Diary System</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <h1>{% if mode == 'new' %}Create New{% else %}Edit{% endif %} Course Diary</h1>
+
+            {% if mode == 'edit' %}
+            <!-- Export Document Section -->
+            <div class="export-section">
+                <div class="export-info">
+                    <h3>📄 Export Course Diary</h3>
+                    <p>Generate a complete Word document (.docx) with all course details</p>
+                </div>
+                <button class="btn btn-export" onclick="generateDocument()" id="export-btn">
+                    <span class="export-icon">📥</span>
+                    <span class="export-text">Download Word Document</span>
+                </button>
+            </div>
+
+            <!-- AI CO-PO Mapping Section -->
+            <div class="export-section" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">
+                <div class="export-info">
+                    <h3>🧠 AI-Assisted CO-PO Mapping</h3>
+                    <p>Let AI suggest CO-PO mappings based on Bloom's taxonomy and course content</p>
+                </div>
+                <a href="/course/{{ filename }}/ai-mapping" class="btn btn-export">
+                    <span class="export-icon">🤖</span>
+                    <span class="export-text">Open AI Mapping Tool</span>
+                </a>
+            </div>
+
+            <!-- Timetable Upload Section -->
+            <div class="export-section" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">
+                <div class="export-info">
+                    <h3>📅 Upload Timetable</h3>
+                    <p>Import your timetable to auto-generate lesson plan dates</p>
+                </div>
+                <a href="/course/{{ filename }}/timetable" class="btn btn-export">
+                    <span class="export-icon">📆</span>
+                    <span class="export-text">Upload Timetable</span>
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab active" data-tab="basic">📋 Basic Info</button>
+                <button class="tab" data-tab="outcomes">🎯 Course Outcomes</button>
+                <button class="tab" data-tab="lesson">📅 Lesson Plan</button>
+                <button class="tab" data-tab="mapping">🔗 CO-PO Mapping</button>
+                <button class="tab" data-tab="assessment">📝 Assessments</button>
+                <button class="tab" data-tab="books">📚 Books</button>
+            </div>
+
+            <!-- Basic Info Tab -->
+            <div class="tab-content active" id="basic">
+                <form id="basicForm" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="course_code">Course Code *</label>
+                            <input type="text" id="course_code" name="course_code" required
+                                value="{{ course.course_info.course_code if course else '' }}"
+                                placeholder="e.g., BSC12CS05">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_name">Course Name *</label>
+                            <input type="text" id="course_name" name="course_name" required
+                                value="{{ course.course_info.course_name if course else '' }}"
+                                placeholder="e.g., Discrete Maths and Statistics">
+                        </div>
+                        <div class="form-group">
+                            <label for="course_type">Course Type *</label>
+                            <select id="course_type" name="course_type" required>
+                                <option value="">Select Type</option>
+                                <option value="theory" {% if course and course.course_info.course_type=='theory'
+                                    %}selected{% endif %}>Theory</option>
+                                <option value="lab" {% if course and course.course_info.course_type=='lab' %}selected{%
+                                    endif %}>Lab</option>
+                                <option value="theory_lab" {% if course and course.course_info.course_type=='theory_lab'
+                                    %}selected{% endif %}>Theory + Lab</option>
+                                <option value="theory_tutorial" {% if course and
+                                    course.course_info.course_type=='theory_tutorial' %}selected{% endif %}>Theory +
+                                    Tutorial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester *</label>
+                            <input type="text" id="semester" name="semester" required
+                                value="{{ course.course_info.semester if course else '' }}"
+                                placeholder="e.g., III, VII">
+                        </div>
+                        <div class="form-group">
+                            <label for="academic_year">Academic Year *</label>
+                            <input type="text" id="academic_year" name="academic_year" required
+                                value="{{ course.course_info.academic_year if course else '' }}"
+                                placeholder="e.g., 2025-26">
+                        </div>
+                        <div class="form-group">
+                            <label for="faculty_name">Faculty Name *</label>
+                            <input type="text" id="faculty_name" name="faculty_name" required
+                                value="{{ course.course_info.faculty_name if course else '' }}"
+                                placeholder="e.g., Prof. Jagruti Save">
+                        </div>
+                        <div class="form-group">
+                            <label for="faculty_designation">Designation</label>
+                            <input type="text" id="faculty_designation" name="faculty_designation"
+                                value="{{ course.course_info.faculty_designation if course else '' }}"
+                                placeholder="e.g., Assistant Professor">
+                        </div>
+                        <div class="form-group">
+                            <label for="branch">Branch *</label>
+                            <input type="text" id="branch" name="branch" required
+                                value="{{ course.course_info.branch if course else 'Artificial Intelligence and Data Science' }}"
+                                placeholder="e.g., AI & DS">
+                        </div>
+                        <div class="form-group">
+                            <label for="division">Division</label>
+                            <input type="text" id="division" name="division"
+                                value="{{ course.course_info.division if course else '' }}" placeholder="e.g., A, B">
+                        </div>
+                        <div class="form-group">
+                            <label for="batches">Batches (for Lab)</label>
+                            <input type="text" id="batches" name="batches"
+                                value="{{ course.course_info.batches|join(',') if course and course.course_info.batches else '' }}"
+                                placeholder="e.g., A,B,C,D">
+                        </div>
+                    </div>
+
+                    {% if mode == 'new' %}
+                    <button type="submit" class="btn btn-primary btn-large">Create Course</button>
+                    {% else %}
+                    <button type="button" class="btn btn-primary btn-large" onclick="saveBasicInfo()">Save
+                        Changes</button>
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- Course Outcomes Tab -->
+            <div class="tab-content" id="outcomes">
+                <div class="section-header">
+                    <h2>Course Outcomes (COs)</h2>
+                    <button class="btn btn-primary" onclick="addOutcome()">➕ Add CO</button>
+                </div>
+
+                <!-- Syllabus Upload Section -->
+                <div class="syllabus-panel"
+                    style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 16px 0; color: #16a34a;">📚 Import from Syllabus (Optional)</h3>
+                    <p style="color: #15803d; margin-bottom: 12px; font-size: 0.9rem;">Upload your syllabus PDF to
+                        auto-extract Course Outcomes for course code: <strong id="current-course-code">{{
+                            course.course_info.course_code if course else 'N/A' }}</strong></p>
+
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px;">
+                        <input type="file" id="syllabus-file" accept=".pdf,.txt"
+                            style="padding: 8px; border: 1px solid #16a34a; border-radius: 6px; background: white;">
+                        <button class="btn" style="background: #22c55e; color: white;" onclick="parseSyllabus()">📤
+                            Extract Course Outcomes</button>
+                    </div>
+
+                    <!-- Extracted Outcomes Preview -->
+                    <div id="extracted-outcomes-panel"
+                        style="display: none; background: white; border-radius: 8px; padding: 16px; border: 1px solid #86efac;">
+                        <h4 style="margin: 0 0 12px 0; color: #16a34a;">✅ Extracted Course Outcomes</h4>
+                        <div id="extracted-outcomes-list" style="max-height: 300px; overflow-y: auto;"></div>
+                        <div style="margin-top: 12px; display: flex; gap: 12px;">
+                            <button class="btn btn-success" onclick="applyExtractedOutcomes(false)">✓ Merge with
+                                Existing</button>
+                            <button class="btn" style="background: #ef4444; color: white;"
+                                onclick="applyExtractedOutcomes(true)">🔄 Replace All</button>
+                            <button class="btn btn-secondary" onclick="clearExtractedOutcomes()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="outcomes-list">
+                    {% if course and course.course_outcomes %}
+                    {% for co in course.course_outcomes %}
+                    <div class="outcome-item" data-index="{{ loop.index0 }}">
+                        <div class="outcome-header">
+                            <input type="text" class="co-id" value="{{ co.co_id }}" placeholder="CO ID (e.g., CO1)">
+                            <select class="blooms-level">
+                                {% for level, name in config.blooms_levels.items() %}
+                                <option value="{{ level }}" {% if co.blooms_level|string==level %}selected{% endif %}>{{
+                                    level }} - {{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class="btn btn-danger btn-small" onclick="removeOutcome(this)">🗑️</button>
+                        </div>
+                        <textarea class="co-statement" placeholder="CO Statement">{{ co.statement }}</textarea>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-success btn-large" onclick="saveOutcomes()">💾 Save Course Outcomes</button>
+            </div>
+
+            <!-- Lesson Plan Tab -->
+            <div class="tab-content" id="lesson">
+                <div class="section-header">
+                    <h2>Lesson Plan</h2>
+                    <button class="btn btn-primary" onclick="addLessonRow()">➕ Add Row</button>
+                </div>
+
+                <!-- Date Generation Section -->
+                <div class="date-generation-panel"
+                    style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 2px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 16px 0; color: #1d4ed8;">📅 Auto-Generate Proposed Dates</h3>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                        <div class="form-group">
+                            <label><strong>Teaching Days</strong></label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-mon" value="1"> Mon
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-tue" value="2"> Tue
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-wed" value="3"> Wed
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-thu" value="4"> Thu
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-fri" value="5"> Fri
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 4px;">
+                                    <input type="checkbox" id="day-sat" value="6"> Sat
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="term-start"><strong>Term Start Date</strong></label>
+                            <input type="date" id="term-start" style="width: 100%; padding: 8px; margin-top: 8px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="term-end"><strong>Term End Date</strong></label>
+                            <input type="date" id="term-end" style="width: 100%; padding: 8px; margin-top: 8px;">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="generateProposedDates()">🗓️ Generate Proposed
+                            Dates</button>
+                        <button class="btn btn-secondary" onclick="clearProposedDates()">🗑️ Clear Dates</button>
+                        <span id="date-generation-status"
+                            style="display: flex; align-items: center; color: #166534;"></span>
+                    </div>
+                </div>
+
+                <!-- Attendance Upload Section -->
+                <div class="attendance-panel"
+                    style="background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 16px 0; color: #b45309;">📋 Upload Attendance Report (Optional)</h3>
+                    <p style="color: #92400e; margin-bottom: 12px; font-size: 0.9rem;">Upload your attendance CSV/Excel
+                        to auto-extract lecture dates for the "Actual Date" column.</p>
+
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px;">
+                        <input type="file" id="attendance-file" accept=".csv,.xls,.xlsx,.txt"
+                            style="padding: 8px; border: 1px solid #d97706; border-radius: 6px; background: white;">
+                        <button class="btn" style="background: #f59e0b; color: white;" onclick="parseAttendance()">📤
+                            Extract from CSV/TXT</button>
+                        <button class="btn" style="background: #ea580c; color: white;"
+                            onclick="parseAttendanceServer()">📤
+                            Extract from Excel</button>
+                    </div>
+
+                    <!-- Extracted Dates -->
+                    <div id="extracted-dates-panel"
+                        style="display: none; background: white; border-radius: 8px; padding: 16px; border: 1px solid #fcd34d;">
+                        <h4 style="margin: 0 0 12px 0; color: #b45309;">✅ Extracted Lecture Dates (click to select)</h4>
+                        <div id="extracted-dates-list"
+                            style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 200px; overflow-y: auto;">
+                        </div>
+                        <div style="margin-top: 12px; display: flex; gap: 12px;">
+                            <button class="btn btn-success" onclick="applySelectedDates()">✓ Apply Selected to Actual
+                                Dates</button>
+                            <button class="btn btn-secondary" onclick="selectAllExtractedDates()">Select All</button>
+                            <button class="btn btn-secondary" onclick="clearExtractedDates()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="lesson-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Sr.</th>
+                                <th>Proposed Date</th>
+                                <th>Topic</th>
+                                <th>Mode</th>
+                                <th>CO</th>
+                                <th>Assessment</th>
+                                <th>Ref.</th>
+                                <th>Actual Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if course and course.lesson_plan %}
+                            {% for item in course.lesson_plan %}
+                            <tr>
+                                <td><input type="number" value="{{ item.sr_no }}" class="input-sm"></td>
+                                <td><input type="date" value="{{ item.proposed_date }}" class="input-sm proposed-date">
+                                </td>
+                                <td><input type="text" value="{{ item.topic }}" class="input-md"></td>
+                                <td>
+                                    <select class="input-sm">
+                                        {% for mode in config.delivery_modes %}
+                                        <option value="{{ mode }}" {% if item.delivery_mode==mode %}selected{% endif %}>
+                                            {{ mode }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="text" value="{{ item.co_mapping|join(',') }}" class="input-sm"
+                                        placeholder="CO1,CO2"></td>
+                                <td><input type="text" value="{{ item.assessment_tool|join(',') }}" class="input-sm">
+                                </td>
+                                <td><input type="text" value="{{ item.reference_book }}" class="input-xs"></td>
+                                <td><input type="date" value="{{ item.actual_date }}" class="input-sm actual-date"></td>
+                                <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn btn-success btn-large" onclick="saveLessonPlan()">💾 Save Lesson Plan</button>
+            </div>
+
+            <!-- CO-PO Mapping Tab -->
+            <div class="tab-content" id="mapping">
+                <div class="section-header">
+                    <h2>CO-PO Mapping Matrix</h2>
+                </div>
+
+                <p class="help-text">Mapping Levels: 1 (Low), 2 (Medium), 3 (High), Leave blank for no mapping</p>
+
+                <div class="table-responsive">
+                    <table id="mapping-table" class="data-table mapping-matrix">
+                        <thead>
+                            <tr>
+                                <th>CO</th>
+                                {% for po in config.program_outcomes %}
+                                <th>{{ po }}</th>
+                                {% endfor %}
+                                <th>BL</th>
+                                <th>PI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if course and course.course_outcomes %}
+                            {% for co in course.course_outcomes %}
+                            {% set mapping = None %}
+                            {% for m in course.co_po_mapping if m.co_id == co.co_id %}
+                            {% set mapping = m %}
+                            {% endfor %}
+                            <tr data-co="{{ co.co_id }}">
+                                <td class="co-label">{{ co.co_id }}</td>
+                                {% for po in config.program_outcomes %}
+                                <td>
+                                    <input type="number" min="1" max="3" class="input-xs po-input" data-po="{{ po }}"
+                                        value="{{ mapping.po_mappings[po] if mapping and mapping.po_mappings and po in mapping.po_mappings else '' }}">
+                                </td>
+                                {% endfor %}
+                                <td><input type="text" class="input-xs bl-input"
+                                        value="{{ mapping.blooms_level if mapping else '' }}"></td>
+                                <td><input type="text" class="input-sm pi-input"
+                                        value="{{ mapping.performance_indicator if mapping else '' }}"></td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Justifications</h3>
+                <div id="justifications">
+                    {% if course and course.course_outcomes %}
+                    {% for co in course.course_outcomes %}
+                    {% set mapping = None %}
+                    {% for m in course.co_po_mapping if m.co_id == co.co_id %}
+                    {% set mapping = m %}
+                    {% endfor %}
+                    <div class="justification-item">
+                        <label>{{ co.co_id }} Justification:</label>
+                        <textarea class="justification-text" data-co="{{ co.co_id }}"
+                            placeholder="Explain why this CO maps to the selected POs...">{{ mapping.justification if mapping else '' }}</textarea>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-success btn-large" onclick="saveMapping()">💾 Save CO-PO Mapping</button>
+            </div>
+
+            <!-- Assessments Tab -->
+            <div class="tab-content" id="assessment">
+                <div class="assessment-section">
+                    <h2>ISE 1 Assessment</h2>
+                    <button class="btn btn-primary btn-small" onclick="addAssessment('ise1')">➕ Add Activity</button>
+
+                    <table id="ise1-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Activity Type</th>
+                                <th>Marks</th>
+                                <th>Scale To</th>
+                                <th>CO</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if course and course.assessments.ise1 %}
+                            {% for item in course.assessments.ise1 %}
+                            <tr>
+                                <td>
+                                    <select class="input-md activity-type">
+                                        {% for type in config.activity_types %}
+                                        <option value="{{ type }}" {% if item.activity_type==type %}selected{% endif %}>
+                                            {{ type }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="number" value="{{ item.marks }}" class="input-xs"></td>
+                                <td><input type="number" value="{{ item.scale_to }}" class="input-xs"></td>
+                                <td><input type="text" value="{{ item.co_mapping }}" class="input-sm" placeholder="CO1">
+                                </td>
+                                <td><input type="date" value="{{ item.date }}" class="input-sm"></td>
+                                <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="assessment-section">
+                    <h2>ISE 2 Assessment</h2>
+                    <button class="btn btn-primary btn-small" onclick="addAssessment('ise2')">➕ Add Activity</button>
+
+                    <table id="ise2-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Activity Type</th>
+                                <th>Marks</th>
+                                <th>Scale To</th>
+                                <th>CO</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if course and course.assessments.ise2 %}
+                            {% for item in course.assessments.ise2 %}
+                            <tr>
+                                <td>
+                                    <select class="input-md activity-type">
+                                        {% for type in config.activity_types %}
+                                        <option value="{{ type }}" {% if item.activity_type==type %}selected{% endif %}>
+                                            {{ type }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td><input type="number" value="{{ item.marks }}" class="input-xs"></td>
+                                <td><input type="number" value="{{ item.scale_to }}" class="input-xs"></td>
+                                <td><input type="text" value="{{ item.co_mapping }}" class="input-sm" placeholder="CO1">
+                                </td>
+                                <td><input type="date" value="{{ item.date }}" class="input-sm"></td>
+                                <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn btn-success btn-large" onclick="saveAssessments()">💾 Save Assessments</button>
+            </div>
+
+            <!-- Recommended Books Tab -->
+            <div class="tab-content" id="books">
+                <div class="section-header">
+                    <h2>Recommended Books</h2>
+                    <button class="btn btn-primary" onclick="addBook()">➕ Add Book</button>
+                </div>
+
+                <div id="books-list">
+                    {% if course and course.recommended_books %}
+                    {% for book in course.recommended_books %}
+                    <div class="book-item">
+                        <div class="book-row">
+                            <input type="text" class="book-id" value="{{ book.id }}" placeholder="ID (1, 2...)">
+                            <input type="text" class="book-title" value="{{ book.title }}" placeholder="Book Title">
+                            <button class="btn btn-danger btn-small" onclick="removeBook(this)">🗑️</button>
+                        </div>
+                        <div class="book-row">
+                            <input type="text" class="book-author" value="{{ book.author }}" placeholder="Author(s)">
+                            <input type="text" class="book-publisher" value="{{ book.publisher }}"
+                                placeholder="Publisher">
+                            <input type="text" class="book-edition" value="{{ book.edition }}" placeholder="Edition">
+                            <select class="book-type">
+                                <option value="textbook" {% if book.type=='textbook' %}selected{% endif %}>Textbook
+                                </option>
+                                <option value="reference" {% if book.type=='reference' %}selected{% endif %}>Reference
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <button class="btn btn-success btn-large" onclick="saveBooks()">💾 Save Books</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const filename = '{{ filename }}';
+        const config = {{ config| tojson }};
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Save Basic Info
+        async function saveBasicInfo() {
+            const basicInfo = {
+                course_code: document.getElementById('course_code').value,
+                course_name: document.getElementById('course_name').value,
+                course_type: document.getElementById('course_type').value,
+                semester: document.getElementById('semester').value,
+                academic_year: document.getElementById('academic_year').value,
+                faculty_name: document.getElementById('faculty_name').value,
+                faculty_designation: document.getElementById('faculty_designation').value,
+                branch: document.getElementById('branch').value,
+                division: document.getElementById('division').value,
+                batches: document.getElementById('batches').value.split(',').map(b => b.trim()).filter(b => b)
+            };
+
+            try {
+                const response = await fetch(`/api/course/${filename}/basic_info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(basicInfo)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Basic info saved successfully!');
+                } else {
+                    alert('❌ Error: ' + (result.error || 'Failed to save'));
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message);
+            }
+        }
+
+        // Course Outcomes
+        function addOutcome() {
+            const list = document.getElementById('outcomes-list');
+            const count = list.children.length;
+            const html = `
+                <div class="outcome-item">
+                    <div class="outcome-header">
+                        <input type="text" class="co-id" value="CO${count + 1}" placeholder="CO ID">
+                        <select class="blooms-level">
+                            ${Object.entries(config.blooms_levels).map(([k, v]) =>
+                `<option value="${k}">${k} - ${v}</option>`
+            ).join('')}
+                        </select>
+                        <button class="btn btn-danger btn-small" onclick="removeOutcome(this)">🗑️</button>
+                    </div>
+                    <textarea class="co-statement" placeholder="CO Statement"></textarea>
+                </div>
+            `;
+            list.insertAdjacentHTML('beforeend', html);
+        }
+
+        function removeOutcome(btn) {
+            btn.closest('.outcome-item').remove();
+        }
+
+        async function saveOutcomes() {
+            const outcomes = [];
+            document.querySelectorAll('.outcome-item').forEach(item => {
+                outcomes.push({
+                    co_id: item.querySelector('.co-id').value,
+                    statement: item.querySelector('.co-statement').value,
+                    blooms_level: parseInt(item.querySelector('.blooms-level').value)
+                });
+            });
+
+            const response = await fetch(`/api/course/${filename}/outcomes`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ outcomes })
+            });
+
+            if (response.ok) {
+                alert('Course outcomes saved!');
+            }
+        }
+
+        // ========== Syllabus Parsing ==========
+
+        let extractedOutcomes = [];
+        let extractedBooks = [];
+
+        async function parseSyllabus() {
+            const fileInput = document.getElementById('syllabus-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a syllabus PDF file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch(`/api/course/${filename}/parse-syllabus`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    if (result.outcomes.length === 0) {
+                        alert(`No Course Outcomes found for course code: ${result.course_code}.\nMake sure the syllabus contains the course code and "CO1", "CO2", etc. patterns.`);
+                        return;
+                    }
+
+                    extractedOutcomes = result.outcomes;
+                    extractedBooks = result.books || [];
+                    displayExtractedOutcomes(result.outcomes, result.books);
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to parse syllabus'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function displayExtractedOutcomes(outcomes, books = []) {
+            const panel = document.getElementById('extracted-outcomes-panel');
+            const list = document.getElementById('extracted-outcomes-list');
+
+            panel.style.display = 'block';
+
+            let html = '<h5 style="margin: 0 0 8px 0; color: #16a34a;">📝 Course Outcomes (' + outcomes.length + ')</h5>';
+            html += outcomes.map((co, idx) => `
+                <div style="padding: 12px; border-bottom: 1px solid #dcfce7; ${idx % 2 === 0 ? 'background: #f0fdf4;' : ''}">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <strong style="color: #16a34a;">${co.co_id}</strong>
+                        <span style="background: #dcfce7; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">Bloom's Level ${co.blooms_level}</span>
+                    </div>
+                    <p style="margin: 0; color: #333; font-size: 0.9rem;">${co.statement}</p>
+                </div>
+            `).join('');
+
+            if (books.length > 0) {
+                html += '<h5 style="margin: 16px 0 8px 0; color: #16a34a;">📚 Books (' + books.length + ')</h5>';
+                html += books.map((book, idx) => `
+                    <div style="padding: 8px; border-bottom: 1px solid #dcfce7; ${idx % 2 === 0 ? 'background: #f0fdf4;' : ''}">
+                        <strong>${book.id}. ${book.title}</strong>
+                        ${book.author ? `<br><span style="color: #666; font-size: 0.85rem;">by ${book.author}</span>` : ''}
+                        ${book.publisher ? `<span style="color: #999; font-size: 0.8rem;"> - ${book.publisher}</span>` : ''}
+                    </div>
+                `).join('');
+            }
+
+            list.innerHTML = html;
+        }
+
+        async function applyExtractedOutcomes(replace) {
+            if (extractedOutcomes.length === 0 && extractedBooks.length === 0) {
+                alert('No outcomes or books to apply');
+                return;
+            }
+
+            try {
+                let messages = [];
+
+                // Apply outcomes if any
+                if (extractedOutcomes.length > 0) {
+                    const outcomesResponse = await fetch(`/api/course/${filename}/apply-outcomes`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ outcomes: extractedOutcomes, replace })
+                    });
+                    const outcomesResult = await outcomesResponse.json();
+                    if (outcomesResult.success) {
+                        messages.push(outcomesResult.message);
+                    }
+                }
+
+                // Apply books if any
+                if (extractedBooks.length > 0) {
+                    const booksResponse = await fetch(`/api/course/${filename}/apply-books`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ books: extractedBooks, replace })
+                    });
+                    const booksResult = await booksResponse.json();
+                    if (booksResult.success) {
+                        messages.push(booksResult.message);
+                    }
+                }
+
+                if (messages.length > 0) {
+                    alert(`✅ ${messages.join(' and ')}`);
+                    location.reload(); // Refresh to show new data
+                } else {
+                    alert('No data was applied');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function clearExtractedOutcomes() {
+            document.getElementById('extracted-outcomes-panel').style.display = 'none';
+            document.getElementById('extracted-outcomes-list').innerHTML = '';
+            extractedOutcomes = [];
+        }
+
+        // ========== Server-Side Attendance Parsing ==========
+
+        async function parseAttendanceServer() {
+            const fileInput = document.getElementById('attendance-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select an attendance file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('year', new Date().getFullYear());
+
+            try {
+                const response = await fetch(`/api/course/${filename}/parse-attendance`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    if (result.dates.length === 0) {
+                        alert('No dates found in the file. The attendance file parsing is still being improved.');
+                        return;
+                    }
+
+                    extractedDates = result.dates;
+                    displayExtractedDates(result.dates);
+
+                    if (result.metadata && result.metadata.course_code) {
+                        console.log(`Parsed attendance for course: ${result.metadata.course_code}`);
+                    }
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to parse attendance'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // Lesson Plan
+        function addLessonRow() {
+            const tbody = document.querySelector('#lesson-table tbody');
+            const count = tbody.children.length + 1;
+            const html = `
+                <tr>
+                    <td><input type="number" value="${count}" class="input-sm"></td>
+                    <td><input type="date" class="input-sm proposed-date" onchange="syncActualDate(this)"></td>
+                    <td><input type="text" class="input-md" placeholder="Topic"></td>
+                    <td>
+                        <select class="input-sm">
+                            ${config.delivery_modes.map(m => `<option value="${m}">${m}</option>`).join('')}
+                        </select>
+                    </td>
+                    <td><input type="text" class="input-sm" placeholder="CO1,CO2"></td>
+                    <td><input type="text" class="input-sm" placeholder="ISE1,MSE"></td>
+                    <td><input type="text" class="input-xs" placeholder="1,2"></td>
+                    <td><input type="date" class="input-sm actual-date"></td>
+                    <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', html);
+        }
+
+        // Sync proposed date to actual date (user can still change actual date separately)
+        function syncActualDate(proposedInput) {
+            const row = proposedInput.closest('tr');
+            const actualInput = row.querySelector('.actual-date') || row.querySelectorAll('input[type="date"]')[1];
+            if (actualInput && !actualInput.value) {
+                actualInput.value = proposedInput.value;
+            }
+        }
+
+        // Initialize date sync for existing rows
+        document.querySelectorAll('#lesson-table tbody tr').forEach(row => {
+            const inputs = row.querySelectorAll('input[type="date"]');
+            if (inputs.length >= 2) {
+                inputs[0].addEventListener('change', function () {
+                    if (!inputs[1].value) {
+                        inputs[1].value = this.value;
+                    }
+                });
+            }
+        });
+
+        function removeRow(btn) {
+            btn.closest('tr').remove();
+        }
+
+        async function saveLessonPlan() {
+            const lessonPlan = [];
+            document.querySelectorAll('#lesson-table tbody tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                lessonPlan.push({
+                    sr_no: parseInt(cells[0].querySelector('input').value) || 0,
+                    proposed_date: cells[1].querySelector('input').value,
+                    topic: cells[2].querySelector('input').value,
+                    delivery_mode: cells[3].querySelector('select').value,
+                    co_mapping: cells[4].querySelector('input').value.split(',').filter(x => x),
+                    assessment_tool: cells[5].querySelector('input').value.split(',').filter(x => x),
+                    reference_book: cells[6].querySelector('input').value,
+                    actual_date: cells[7].querySelector('input').value
+                });
+            });
+
+            const response = await fetch(`/api/course/${filename}/lesson_plan`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lesson_plan: lessonPlan })
+            });
+
+            if (response.ok) {
+                alert('Lesson plan saved!');
+            }
+        }
+
+        // ========== Proposed Date Generation ==========
+
+        function getSelectedDays() {
+            const days = [];
+            if (document.getElementById('day-mon').checked) days.push(1); // Monday = 1
+            if (document.getElementById('day-tue').checked) days.push(2);
+            if (document.getElementById('day-wed').checked) days.push(3);
+            if (document.getElementById('day-thu').checked) days.push(4);
+            if (document.getElementById('day-fri').checked) days.push(5);
+            if (document.getElementById('day-sat').checked) days.push(6);
+            return days;
+        }
+
+        function generateDatesForDays(startDate, endDate, selectedDays) {
+            const dates = [];
+            const current = new Date(startDate);
+            const end = new Date(endDate);
+
+            while (current <= end) {
+                // JavaScript: Sunday=0, Monday=1, etc.
+                const dayOfWeek = current.getDay();
+                // Convert: our checkbox uses 1=Mon, 6=Sat, but JS uses 0=Sun, 1=Mon
+                if (selectedDays.includes(dayOfWeek === 0 ? 7 : dayOfWeek)) {
+                    dates.push(current.toISOString().split('T')[0]); // YYYY-MM-DD format
+                }
+                current.setDate(current.getDate() + 1);
+            }
+            return dates;
+        }
+
+        function generateProposedDates() {
+            const selectedDays = getSelectedDays();
+            const startDate = document.getElementById('term-start').value;
+            const endDate = document.getElementById('term-end').value;
+
+            if (selectedDays.length === 0) {
+                alert('Please select at least one teaching day');
+                return;
+            }
+            if (!startDate || !endDate) {
+                alert('Please enter both term start and end dates');
+                return;
+            }
+            if (new Date(startDate) > new Date(endDate)) {
+                alert('Start date must be before end date');
+                return;
+            }
+
+            const dates = generateDatesForDays(startDate, endDate, selectedDays);
+            const tbody = document.querySelector('#lesson-table tbody');
+            const rows = tbody.querySelectorAll('tr');
+
+            if (rows.length === 0) {
+                // Create rows for each date
+                dates.forEach((date, index) => {
+                    const html = `
+                        <tr>
+                            <td><input type="number" value="${index + 1}" class="input-sm"></td>
+                            <td><input type="date" value="${date}" class="input-sm proposed-date"></td>
+                            <td><input type="text" class="input-md" placeholder="Topic"></td>
+                            <td>
+                                <select class="input-sm">
+                                    ${config.delivery_modes.map(m => `<option value="${m}">${m}</option>`).join('')}
+                                </select>
+                            </td>
+                            <td><input type="text" class="input-sm" placeholder="CO1,CO2"></td>
+                            <td><input type="text" class="input-sm" placeholder="ISE1,MSE"></td>
+                            <td><input type="text" class="input-xs" placeholder="1,2"></td>
+                            <td><input type="date" class="input-sm actual-date"></td>
+                            <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                        </tr>
+                    `;
+                    tbody.insertAdjacentHTML('beforeend', html);
+                });
+            } else {
+                // Update existing rows
+                dates.forEach((date, index) => {
+                    if (index < rows.length) {
+                        const proposedInput = rows[index].querySelector('td:nth-child(2) input');
+                        if (proposedInput) proposedInput.value = date;
+                    } else {
+                        // Add new row if needed
+                        const html = `
+                            <tr>
+                                <td><input type="number" value="${index + 1}" class="input-sm"></td>
+                                <td><input type="date" value="${date}" class="input-sm proposed-date"></td>
+                                <td><input type="text" class="input-md" placeholder="Topic"></td>
+                                <td>
+                                    <select class="input-sm">
+                                        ${config.delivery_modes.map(m => `<option value="${m}">${m}</option>`).join('')}
+                                    </select>
+                                </td>
+                                <td><input type="text" class="input-sm" placeholder="CO1,CO2"></td>
+                                <td><input type="text" class="input-sm" placeholder="ISE1,MSE"></td>
+                                <td><input type="text" class="input-xs" placeholder="1,2"></td>
+                                <td><input type="date" class="input-sm actual-date"></td>
+                                <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                            </tr>
+                        `;
+                        tbody.insertAdjacentHTML('beforeend', html);
+                    }
+                });
+            }
+
+            document.getElementById('date-generation-status').textContent = `✅ Generated ${dates.length} dates`;
+        }
+
+        function clearProposedDates() {
+            document.querySelectorAll('#lesson-table tbody tr').forEach(row => {
+                const proposedInput = row.querySelector('td:nth-child(2) input');
+                if (proposedInput) proposedInput.value = '';
+            });
+            document.getElementById('date-generation-status').textContent = '🗑️ Dates cleared';
+        }
+
+        // ========== Attendance File Parsing ==========
+
+        let extractedDates = [];
+
+        function parseAttendance() {
+            const fileInput = document.getElementById('attendance-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select an attendance file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const content = e.target.result;
+                const dates = extractDatesFromContent(content);
+
+                if (dates.length === 0) {
+                    alert('No dates found in the file. Make sure dates are in DD/MM/YYYY, YYYY-MM-DD, or similar format.');
+                    return;
+                }
+
+                extractedDates = dates;
+                displayExtractedDates(dates);
+            };
+            reader.readAsText(file);
+        }
+
+        function extractDatesFromContent(content) {
+            const dates = new Set();
+
+            // Common date patterns
+            const patterns = [
+                /(\d{4})-(\d{2})-(\d{2})/g,          // YYYY-MM-DD
+                /(\d{2})\/(\d{2})\/(\d{4})/g,        // DD/MM/YYYY or MM/DD/YYYY
+                /(\d{2})-(\d{2})-(\d{4})/g,          // DD-MM-YYYY
+                /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{4})/gi // 5 Jan 2025
+            ];
+
+            // Extract YYYY-MM-DD format
+            let match;
+            const isoPattern = /(\d{4})-(\d{2})-(\d{2})/g;
+            while ((match = isoPattern.exec(content)) !== null) {
+                dates.add(match[0]);
+            }
+
+            // Extract DD/MM/YYYY format and convert
+            const slashPattern = /(\d{2})\/(\d{2})\/(\d{4})/g;
+            while ((match = slashPattern.exec(content)) !== null) {
+                const [_, d, m, y] = match;
+                // Assume DD/MM/YYYY format (common in India)
+                dates.add(`${y}-${m}-${d}`);
+            }
+
+            // Extract DD-MM-YYYY format and convert
+            const dashPattern = /(\d{2})-(\d{2})-(\d{4})/g;
+            while ((match = dashPattern.exec(content)) !== null) {
+                const [_, d, m, y] = match;
+                dates.add(`${y}-${m}-${d}`);
+            }
+
+            // Extract text dates like "5 January 2025"
+            const months = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06', jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12' };
+            const textPattern = /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{4})/gi;
+            while ((match = textPattern.exec(content)) !== null) {
+                const [_, day, month, year] = match;
+                const m = months[month.toLowerCase().substring(0, 3)];
+                const d = day.padStart(2, '0');
+                dates.add(`${year}-${m}-${d}`);
+            }
+
+            // Sort dates
+            return Array.from(dates).sort();
+        }
+
+        function displayExtractedDates(dates) {
+            const panel = document.getElementById('extracted-dates-panel');
+            const list = document.getElementById('extracted-dates-list');
+
+            panel.style.display = 'block';
+            list.innerHTML = dates.map(date => {
+                const formatted = new Date(date).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+                return `<label style="display: flex; align-items: center; gap: 4px; padding: 6px 10px; background: #fef3c7; border-radius: 6px; cursor: pointer;">
+                    <input type="checkbox" class="extracted-date-checkbox" value="${date}" checked>
+                    <span>${formatted}</span>
+                </label>`;
+            }).join('');
+        }
+
+        function selectAllExtractedDates() {
+            document.querySelectorAll('.extracted-date-checkbox').forEach(cb => cb.checked = true);
+        }
+
+        function clearExtractedDates() {
+            document.getElementById('extracted-dates-panel').style.display = 'none';
+            document.getElementById('extracted-dates-list').innerHTML = '';
+            extractedDates = [];
+        }
+
+        function applySelectedDates() {
+            const selectedDates = Array.from(document.querySelectorAll('.extracted-date-checkbox:checked'))
+                .map(cb => cb.value);
+
+            if (selectedDates.length === 0) {
+                alert('Please select at least one date');
+                return;
+            }
+
+            const rows = document.querySelectorAll('#lesson-table tbody tr');
+            let appliedCount = 0;
+
+            selectedDates.forEach((date, index) => {
+                if (index < rows.length) {
+                    const actualInput = rows[index].querySelector('.actual-date') ||
+                        rows[index].querySelector('td:nth-child(8) input');
+                    if (actualInput) {
+                        actualInput.value = date;
+                        appliedCount++;
+                    }
+                }
+            });
+
+            alert(`✅ Applied ${appliedCount} actual dates to lesson plan rows`);
+        }
+
+        // CO-PO Mapping
+        async function saveMapping() {
+            const mapping = [];
+            document.querySelectorAll('#mapping-table tbody tr').forEach(row => {
+                const co_id = row.dataset.co;
+                const po_mappings = {};
+                row.querySelectorAll('.po-input').forEach(input => {
+                    if (input.value) {
+                        po_mappings[input.dataset.po] = parseInt(input.value);
+                    }
+                });
+
+                const justText = document.querySelector(`.justification-text[data-co="${co_id}"]`);
+
+                mapping.push({
+                    co_id,
+                    blooms_level: row.querySelector('.bl-input').value,
+                    performance_indicator: row.querySelector('.pi-input').value,
+                    po_mappings,
+                    justification: justText ? justText.value : ''
+                });
+            });
+
+            const response = await fetch(`/api/course/${filename}/co_po_mapping`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mapping })
+            });
+
+            if (response.ok) {
+                alert('CO-PO mapping saved!');
+            }
+        }
+
+        // Assessments
+        function addAssessment(iseType) {
+            const tbody = document.querySelector(`#${iseType}-table tbody`);
+            const html = `
+                <tr>
+                    <td>
+                        <select class="input-md activity-type">
+                            ${config.activity_types.map(t => `<option value="${t}">${t}</option>`).join('')}
+                        </select>
+                    </td>
+                    <td><input type="number" value="10" class="input-xs"></td>
+                    <td><input type="number" value="" class="input-xs"></td>
+                    <td><input type="text" placeholder="CO1" class="input-sm"></td>
+                    <td><input type="date" class="input-sm"></td>
+                    <td><button class="btn btn-danger btn-small" onclick="removeRow(this)">🗑️</button></td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', html);
+        }
+
+        async function saveAssessments() {
+            const getTableData = (tableId) => {
+                const data = [];
+                document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    data.push({
+                        activity_type: cells[0].querySelector('select').value,
+                        marks: parseInt(cells[1].querySelector('input').value) || 0,
+                        scale_to: parseInt(cells[2].querySelector('input').value) || 0,
+                        co_mapping: cells[3].querySelector('input').value,
+                        date: cells[4].querySelector('input').value
+                    });
+                });
+                return data;
+            };
+
+            const assessments = {
+                ise1: getTableData('ise1-table'),
+                ise2: getTableData('ise2-table'),
+                tutorials: []
+            };
+
+            const response = await fetch(`/api/course/${filename}/assessments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ assessments })
+            });
+
+            if (response.ok) {
+                alert('Assessments saved!');
+            }
+        }
+
+        // Books
+        function addBook() {
+            const list = document.getElementById('books-list');
+            const count = list.children.length + 1;
+            const html = `
+                <div class="book-item">
+                    <div class="book-row">
+                        <input type="text" class="book-id" value="${count}" placeholder="ID">
+                        <input type="text" class="book-title" placeholder="Book Title">
+                        <button class="btn btn-danger btn-small" onclick="removeBook(this)">🗑️</button>
+                    </div>
+                    <div class="book-row">
+                        <input type="text" class="book-author" placeholder="Author(s)">
+                        <input type="text" class="book-publisher" placeholder="Publisher">
+                        <input type="text" class="book-edition" placeholder="Edition">
+                        <select class="book-type">
+                            <option value="textbook">Textbook</option>
+                            <option value="reference">Reference</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            list.insertAdjacentHTML('beforeend', html);
+        }
+
+        function removeBook(btn) {
+            btn.closest('.book-item').remove();
+        }
+
+        async function saveBooks() {
+            const books = [];
+            document.querySelectorAll('.book-item').forEach(item => {
+                books.push({
+                    id: item.querySelector('.book-id').value,
+                    title: item.querySelector('.book-title').value,
+                    author: item.querySelector('.book-author').value,
+                    publisher: item.querySelector('.book-publisher').value,
+                    edition: item.querySelector('.book-edition').value,
+                    type: item.querySelector('.book-type').value
+                });
+            });
+
+            const response = await fetch(`/api/course/${filename}/books`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ books: books })
+            });
+
+            if (response.ok) {
+                alert('Books saved successfully!');
+            } else {
+                alert('Error saving books');
+            }
+        }
+
+        // Generate Word Document
+        async function generateDocument() {
+            const btn = document.getElementById('export-btn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="export-icon">⏳</span><span class="export-text">Generating...</span>';
+
+            try {
+                const response = await fetch(`/course/${filename}/generate`, {
+                    method: 'POST'
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Download the file
+                    window.location.href = result.download_url;
+                    btn.innerHTML = '<span class="export-icon">✅</span><span class="export-text">Downloaded!</span>';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    alert('Error generating document: ' + (result.error || 'Unknown error'));
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

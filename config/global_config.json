@@ -1,0 +1,183 @@
+{
+    "institution": {
+        "name": "Fr. Conceicao Rodrigues College of Engineering",
+        "department": "Artificial Intelligence & Data Science",
+        "hod_name": "Dr. Jagruti Save",
+        "hod_title": "Professor and HOD (AI&DS / CSE)",
+        "vision": "To mould high quality, innovative and ethical AI engineers to become part of global workforce and contribute to the betterment of society",
+        "mission": [
+            "Provide students with a skill-based education that will help them master problem-solving and analytical skills, as well as expand their domain expertise",
+            "Promote continuous learning and research in the core and emerging areas of AI and Data science",
+            "Facilitate an excellent scholastic environment for students and faculty by developing center of excellence in advanced technology"
+        ],
+        "peos": [
+            "Innovate, create, analyze, design, implement and test AI-based solutions to solve the real world business problems",
+            "Adapt to changing AI-DS technology and use it in a multidisciplinary context",
+            "Develop and demonstrate leadership and interpersonal skills in their chosen field"
+        ],
+        "pso": "The graduates of BE in Artificial Intelligence & Data Science program will have strong foundation and ability to use cutting-edge AI tools and techniques to innovate and develop new solutions"
+    },
+    "time_slots": [
+        "8:45am-9:45am",
+        "9:45am-10:45am",
+        "10:45am-11:00am",
+        "11:00am-12:00pm",
+        "12:00pm-1:00pm",
+        "1:00pm-1:30pm",
+        "1:30pm-2:30pm",
+        "2:30pm-3:30pm",
+        "3:30pm-4:30pm"
+    ],
+    "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ],
+    "program_outcomes": [
+        "PO1",
+        "PO2",
+        "PO3",
+        "PO4",
+        "PO5",
+        "PO6",
+        "PO7",
+        "PO8",
+        "PO9",
+        "PO10",
+        "PO11",
+        "PO12"
+    ],
+    "blooms_levels": {
+        "1": "Remember",
+        "2": "Understand",
+        "3": "Apply",
+        "4": "Analyze",
+        "5": "Evaluate",
+        "6": "Create"
+    },
+    "mapping_levels": {
+        "1": "Low",
+        "2": "Medium",
+        "3": "High",
+        "-": "No Mapping"
+    },
+    "delivery_modes": [
+        "Lecture",
+        "Tutorial",
+        "Quiz",
+        "Activity",
+        "Lab",
+        "Revision"
+    ],
+    "assessment_tools": [
+        "ISE1",
+        "ISE2",
+        "MSE",
+        "ESE",
+        "Tutorial"
+    ],
+    "activity_types": [
+        "Class Test",
+        "Quiz",
+        "Crossword",
+        "Coding Activity",
+        "Assignment",
+        "Case Study",
+        "Find the Word",
+        "Mini Project"
+    ],
+    "exit_survey_options": [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree"
+    ],
+    "exam_types": {
+        "MSE": {
+            "duration": 90,
+            "max_marks": 30
+        },
+        "ESE": {
+            "duration": 180,
+            "max_marks": 100
+        },
+        "Special": {
+            "duration": 180,
+            "max_marks": 100
+        }
+    },
+    "rubric_indicators": {
+        "experiment": {
+            "Timeline": {
+                "max": 2,
+                "levels": {
+                    "0": "Submission not done",
+                    "1": "1+ week late",
+                    "2": "Maintains deadline"
+                }
+            },
+            "Completion": {
+                "max": 2,
+                "levels": {
+                    "0": "Many mistakes",
+                    "1": "Just acceptable",
+                    "2": "Neatly organized"
+                }
+            },
+            "Performance": {
+                "max": 2,
+                "levels": {
+                    "0": "Could not perform",
+                    "1": "Implemented few parts",
+                    "2": "Full implementation"
+                }
+            },
+            "Knowledge": {
+                "max": 4,
+                "levels": {
+                    "0": "Unable to answer",
+                    "1-2": "Few questions",
+                    "3-4": "All with explanation"
+                }
+            }
+        },
+        "mini_project": {
+            "Timeline": {
+                "max": 2,
+                "levels": {
+                    "0": "Submission not done",
+                    "1": "1+ week late",
+                    "2": "Maintains deadline"
+                }
+            },
+            "Report": {
+                "max": 2,
+                "levels": {
+                    "0": "Not in format",
+                    "1": "Somewhat as per format",
+                    "2": "Fully as per format"
+                }
+            },
+            "Presentation": {
+                "max": 2,
+                "levels": {
+                    "0": "Could not perform",
+                    "1": "Acceptable",
+                    "2": "Excellent"
+                }
+            },
+            "Knowledge": {
+                "max": 4,
+                "levels": {
+                    "0": "Unable to answer",
+                    "1-2": "Few questions",
+                    "3-4": "All with explanation"
+                }
+            }
+        }
+    }
+}

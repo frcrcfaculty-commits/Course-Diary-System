@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Timetable - {{ course.course_info.course_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .timetable-header {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+            color: white;
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+
+        .timetable-header h1 {
+            margin: 0 0 8px 0;
+        }
+
+        .timetable-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .upload-section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .upload-section h2 {
+            margin: 0 0 16px 0;
+            font-size: 1.125rem;
+        }
+
+        .timetable-input {
+            width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+            margin-bottom: 16px;
+        }
+
+        .timetable-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .format-help {
+            background: #f0f9ff;
+            border-left: 3px solid #0ea5e9;
+            padding: 12px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .format-help h4 {
+            margin: 0 0 8px 0;
+            color: #0369a1;
+        }
+
+        .format-help pre {
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        .schedule-preview {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(8, 1fr);
+            gap: 2px;
+            background: var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .schedule-cell {
+            background: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .schedule-header {
+            background: var(--bg);
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+
+        .schedule-day {
+            background: var(--bg);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .schedule-course {
+            background: #dcfce7;
+            border: 2px solid #22c55e;
+            font-weight: 500;
+            color: #166534;
+        }
+
+        .schedule-other {
+            color: var(--text-muted);
+        }
+
+        .course-summary {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .course-summary h3 {
+            margin: 0 0 12px 0;
+            color: #166534;
+        }
+
+        .summary-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #15803d;
+        }
+
+        .date-generator {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .date-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .date-inputs .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .date-inputs label {
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .date-inputs input {
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .generated-dates {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .date-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .date-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .date-list li:last-child {
+            border-bottom: none;
+        }
+
+        .date-list .date-num {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .date-list .date-day {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('index') }}" class="logo">📚 Course Diary System</a>
+                <a href="{{ url_for('edit_course', filename=filename) }}" class="btn btn-secondary">← Back to Course</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Header -->
+        <div class="timetable-header">
+            <h1>📅 Upload Timetable</h1>
+            <p>{{ course.course_info.course_name }} ({{ course.course_info.course_code }})</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h2>📤 Upload or Paste Your Timetable</h2>
+
+            <!-- File Upload Options -->
+            <div
+                style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                <h4 style="margin: 0 0 12px 0; color: #b45309;">📁 Upload File (CSV or Image)</h4>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                    <input type="file" id="timetable-file" accept=".csv,.png,.jpg,.jpeg"
+                        style="padding: 8px; border: 1px solid #f59e0b; border-radius: 6px; background: white;">
+                    <button class="btn" style="background: #f59e0b; color: white;" onclick="uploadTimetableFile()">
+                        📤 Upload & Parse
+                    </button>
+                </div>
+                <p style="font-size: 0.8rem; color: #92400e; margin: 8px 0 0 0;">
+                    Supported: CSV files, PNG/JPG images (text will be extracted using OCR)
+                </p>
+            </div>
+
+            <div class="format-help">
+                <h4>💡 Supported Formats</h4>
+                <p>Paste your timetable in any of these formats:</p>
+                <pre>Format 1 - Table:
+Day     | 8:45-9:45 | 9:45-10:45 | 11:00-12:00 | ...
+Monday  | DMS       | CNS        | -           | ...
+Tuesday | -         | DMS        | NLP         | ...</pre>
+                <pre>Format 2 - List:
+Monday: 8:45-9:45 DMS, 11:00-12:00 CNS
+Tuesday: 9:45-10:45 NLP, 13:30-14:30 DMS</pre>
+            </div>
+
+            <textarea id="timetable-text" class="timetable-input"
+                placeholder="Paste your timetable here or upload a file above...">{% if course.timetable %}{{ course.timetable.raw_text }}{% endif %}</textarea>
+
+            <div class="actions-bar">
+                <button class="btn btn-primary" onclick="parseTimetable()">🔍 Parse Timetable</button>
+                <button class="btn btn-secondary" onclick="loadSampleTimetable()">📋 Load Sample</button>
+            </div>
+        </div>
+
+        <!-- Schedule Preview (shown after parsing) -->
+        <div class="schedule-preview" id="schedule-preview" style="display: none;">
+            <h2>📊 Parsed Schedule</h2>
+
+            <div class="course-summary" id="course-summary">
+                <h3>🎯 {{ course.course_info.course_code }} Schedule</h3>
+                <p id="schedule-summary-text"></p>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-days">-</div>
+                        <div class="stat-label">Teaching Days</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-hours">-</div>
+                        <div class="stat-label">Hours/Week</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-grid" id="schedule-grid">
+                <!-- Grid will be populated by JavaScript -->
+            </div>
+
+            <div class="actions-bar">
+                <button class="btn btn-success" onclick="saveTimetable()">💾 Save Timetable</button>
+            </div>
+        </div>
+
+        <!-- Date Generator -->
+        <div class="date-generator" id="date-generator" style="{% if not course.timetable %}display: none;{% endif %}">
+            <h2>📆 Generate Lesson Plan Dates</h2>
+            <p>Based on your timetable, automatically generate proposed dates for your lesson plan.</p>
+
+            <div class="date-inputs">
+                <div class="form-group">
+                    <label for="start-date">Semester Start Date</label>
+                    <input type="date" id="start-date" value="2026-01-06">
+                </div>
+                <div class="form-group">
+                    <label for="end-date">Semester End Date</label>
+                    <input type="date" id="end-date" value="2026-04-30">
+                </div>
+                <div class="form-group">
+                    <label for="holidays">Holidays (comma-separated)</label>
+                    <input type="text" id="holidays" placeholder="2026-01-26, 2026-03-29">
+                </div>
+            </div>
+
+            <div class="actions-bar" style="margin-bottom: 20px;">
+                <button class="btn btn-primary" onclick="generateDates()">🗓️ Generate Dates</button>
+            </div>
+
+            <div id="dates-result" style="display: none;">
+                <h3>📋 Generated Lecture Dates (<span id="total-lectures">0</span> lectures)</h3>
+                <div class="generated-dates">
+                    <ul class="date-list" id="date-list"></ul>
+                </div>
+
+                <div class="actions-bar" style="margin-top: 20px;">
+                    <button class="btn btn-success" onclick="applyDates(false)">✅ Apply to Lesson Plan (Merge)</button>
+                    <button class="btn btn-warning" onclick="applyDates(true)">🔄 Replace Lesson Plan</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const filename = '{{ filename }}';
+        const courseCode = '{{ course.course_info.course_code }}';
+
+        let parsedSchedule = null;
+        let courseSchedule = null;
+        let generatedDates = [];
+
+        // Load existing timetable if available
+        {% if course.timetable %}
+        parsedSchedule = {{ course.timetable.full_schedule | tojson }};
+        courseSchedule = {{ course.timetable.course_schedule | tojson }};
+        if (courseSchedule && courseSchedule.teaching_days && courseSchedule.teaching_days.length > 0) {
+            showSchedulePreview();
+        }
+        {% endif %}
+
+        function loadSampleTimetable() {
+            const sample = `Day | 8:45-9:45 | 9:45-10:45 | 11:00-12:00 | 12:00-13:00 | 13:30-14:30 | 14:30-15:30
+Monday | ${courseCode} | CNS | - | NLP | - | Lab
+Tuesday | - | ${courseCode} | AI | - | Lab | Lab
+Wednesday | ${courseCode} | - | CNS | NLP | - | -
+Thursday | - | AI | ${courseCode} | - | Lab | Lab
+Friday | AI | ${courseCode} | - | CNS | - | -`;
+
+            document.getElementById('timetable-text').value = sample;
+        }
+
+        async function uploadTimetableFile() {
+            const fileInput = document.getElementById('timetable-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch(`/api/course/${filename}/upload-timetable`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Put extracted text in textarea
+                    document.getElementById('timetable-text').value = result.extracted_text;
+                    alert('✅ File processed! Review the extracted text and click "Parse Timetable"');
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to process file'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function parseTimetable() {
+            const text = document.getElementById('timetable-text').value.trim();
+
+            if (!text) {
+                alert('Please paste your timetable first');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/course/${filename}/parse-timetable`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ timetable_text: text })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    parsedSchedule = result.full_schedule;
+                    courseSchedule = result.course_schedule;
+
+                    showSchedulePreview();
+                    document.getElementById('schedule-summary-text').textContent = result.summary;
+                } else {
+                    alert('Error parsing timetable');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function showSchedulePreview() {
+            document.getElementById('schedule-preview').style.display = 'block';
+            document.getElementById('date-generator').style.display = 'block';
+
+            // Update stats
+            document.getElementById('stat-days').textContent = courseSchedule.teaching_days?.length || 0;
+            document.getElementById('stat-hours').textContent = courseSchedule.total_hours_per_week || 0;
+
+            // Build schedule grid
+            buildScheduleGrid();
+        }
+
+        function buildScheduleGrid() {
+            const grid = document.getElementById('schedule-grid');
+            const timeSlots = ['8:45-9:45', '9:45-10:45', '11:00-12:00', '12:00-13:00', '13:30-14:30', '14:30-15:30', '15:30-16:30'];
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            let html = '<div class="schedule-cell schedule-header">Day</div>';
+
+            // Time headers
+            timeSlots.forEach(slot => {
+                html += `<div class="schedule-cell schedule-header">${slot}</div>`;
+            });
+
+            // Day rows
+            days.forEach(day => {
+                html += `<div class="schedule-cell schedule-day">${day.substring(0, 3)}</div>`;
+
+                timeSlots.forEach((slot, idx) => {
+                    const daySlots = parsedSchedule[day] || [];
+                    const matching = daySlots.find(s => s.slot_index === idx);
+
+                    if (matching) {
+                        const isThisCourse = matching.course.toLowerCase().includes(courseCode.toLowerCase());
+                        const cellClass = isThisCourse ? 'schedule-course' : 'schedule-other';
+                        html += `<div class="schedule-cell ${cellClass}">${matching.course}</div>`;
+                    } else {
+                        html += `<div class="schedule-cell">-</div>`;
+                    }
+                });
+            });
+
+            grid.innerHTML = html;
+        }
+
+        async function saveTimetable() {
+            const text = document.getElementById('timetable-text').value.trim();
+
+            try {
+                const response = await fetch(`/api/course/${filename}/save-timetable`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        raw_text: text,
+                        full_schedule: parsedSchedule,
+                        course_schedule: courseSchedule,
+                        summary: document.getElementById('schedule-summary-text').textContent
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('✅ Timetable saved successfully!');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        async function generateDates() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const holidaysText = document.getElementById('holidays').value;
+            const holidays = holidaysText ? holidaysText.split(',').map(h => h.trim()) : [];
+
+            try {
+                const response = await fetch(`/api/course/${filename}/generate-lesson-dates`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ start_date: startDate, end_date: endDate, holidays })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    generatedDates = result.lesson_dates;
+                    showGeneratedDates(result.lesson_dates, result.total_lectures);
+                } else {
+                    alert(result.error || 'Error generating dates');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function showGeneratedDates(dates, total) {
+            document.getElementById('dates-result').style.display = 'block';
+            document.getElementById('total-lectures').textContent = total;
+
+            const list = document.getElementById('date-list');
+            list.innerHTML = dates.map(d => `
+                <li>
+                    <span class="date-num">Lecture ${d.sr_no}</span>
+                    <span>${d.proposed_date}</span>
+                    <span class="date-day">${d.day} ${d.time || ''}</span>
+                </li>
+            `).join('');
+        }
+
+        async function applyDates(replace) {
+            if (!generatedDates.length) {
+                alert('No dates generated');
+                return;
+            }
+
+            const action = replace ? 'replace' : 'merge with';
+            if (!confirm(`This will ${action} your existing lesson plan. Continue?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/course/${filename}/apply-lesson-dates`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lesson_dates: generatedDates, replace })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('✅ Lesson dates applied! Go to Lesson Plan tab to add topics.');
+                    window.location.href = `/course/edit/${filename}`;
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,453 @@
+{
+  "course_info": {
+    "course_code": "BSC12CS05",
+    "course_name": "Discrete Maths and Statistics",
+    "course_type": "theory_tutorial",
+    "semester": "III",
+    "academic_year": "2024-25",
+    "faculty_name": "Prof. Jagruti Save",
+    "faculty_designation": "Professor and HOD",
+    "branch": "Artificial Intelligence and Data Science",
+    "division": "",
+    "batches": []
+  },
+  "course_outcomes": [
+    {
+      "co_id": "CO1",
+      "statement": "Apply propositional and predicate logic to solve problems and represent mathematical statements",
+      "blooms_level": 3
+    },
+    {
+      "co_id": "CO2",
+      "statement": "Analyze the implications of different types of relations and functions in various mathematical and real-world contexts",
+      "blooms_level": 4
+    },
+    {
+      "co_id": "CO3",
+      "statement": "Classify algebraic structures, Groups, Rings and solve problems using algebraic structures",
+      "blooms_level": 3
+    },
+    {
+      "co_id": "CO4",
+      "statement": "Solve the problems on sampling and Normal probability distributions",
+      "blooms_level": 3
+    },
+    {
+      "co_id": "CO5",
+      "statement": "Develop and test a hypothesis about the population parameters to draw meaningful conclusions",
+      "blooms_level": 5
+    }
+  ],
+  "co_po_mapping": [
+    {
+      "co_id": "CO1",
+      "blooms_level": "2,3",
+      "performance_indicator": "1.6.1",
+      "po_mappings": {
+        "PO1": 3
+      },
+      "justification": "Logic forms the basis of algorithm design and software correctness; essential engineering knowledge."
+    },
+    {
+      "co_id": "CO2",
+      "blooms_level": "2,3",
+      "performance_indicator": "1.2.1, 1.2.2",
+      "po_mappings": {
+        "PO1": 3
+      },
+      "justification": "Understanding functions and relations is fundamental to system modeling, signal processing, and many other engineering areas."
+    },
+    {
+      "co_id": "CO3",
+      "blooms_level": "3",
+      "performance_indicator": "1.6.1, 1.6.2",
+      "po_mappings": {
+        "PO1": 2
+      },
+      "justification": "Group theory and algebraic structures are foundational in cryptography, coding theory, and theoretical computer science."
+    },
+    {
+      "co_id": "CO4",
+      "blooms_level": "2,3",
+      "performance_indicator": "1.2.1",
+      "po_mappings": {
+        "PO1": 3
+      },
+      "justification": "Key in statistical analysis, quality control, signal processing\u2014widely applied across engineering disciplines."
+    },
+    {
+      "co_id": "CO5",
+      "blooms_level": "2,3",
+      "performance_indicator": "1.2.1, 1.2.2",
+      "po_mappings": {
+        "PO1": 3,
+        "PO4": 2
+      },
+      "justification": "Hypothesis testing is core to scientific research, data analysis, and experimental engineering."
+    }
+  ],
+  "lesson_plan": [
+    {
+      "sr_no": 1,
+      "proposed_date": "2024-07-09",
+      "actual_date": "2024-07-09",
+      "topic": "Subject Introduction, Syllabus, Course outcome",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": []
+    },
+    {
+      "sr_no": 2,
+      "proposed_date": "2024-07-10",
+      "actual_date": "2024-07-10",
+      "topic": "Propositional Logic",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        "MSE",
+        "ESE"
+      ],
+      "reference_book": "1,2,3"
+    },
+    {
+      "sr_no": 3,
+      "proposed_date": "2024-07-12",
+      "actual_date": "2024-07-12",
+      "topic": "Predicate Logic",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        "MSE",
+        "ESE"
+      ],
+      "reference_book": "1,2,3"
+    },
+    {
+      "sr_no": 4,
+      "proposed_date": "2024-07-16",
+      "actual_date": "2024-07-16",
+      "topic": "Laws of Logic",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        "MSE",
+        "ESE"
+      ],
+      "reference_book": "1,2,3"
+    },
+    {
+      "sr_no": 5,
+      "proposed_date": "2024-07-19",
+      "actual_date": "2024-07-17",
+      "topic": "Quantifiers, Normal Forms",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        "MSE",
+        "ESE"
+      ],
+      "reference_book": "1,2,3"
+    }
+  ],
+  "assessments": {
+    "ise1": [
+      {
+        "activity_type": "Test on first chapter",
+        "marks": 15,
+        "scale_to": 6,
+        "co_mapping": "CO1",
+        "date": "2024-07-24"
+      },
+      {
+        "activity_type": "Quiz on relation",
+        "marks": 10,
+        "scale_to": 8,
+        "co_mapping": "CO2"
+      },
+      {
+        "activity_type": "Quiz on Function",
+        "marks": 10,
+        "scale_to": 0,
+        "co_mapping": "CO2"
+      },
+      {
+        "activity_type": "Quiz on algebraic structure",
+        "marks": 15,
+        "scale_to": 6,
+        "co_mapping": "CO3"
+      }
+    ],
+    "ise2": [
+      {
+        "activity_type": "Normal dist quiz",
+        "marks": 15,
+        "scale_to": 10,
+        "co_mapping": "CO4"
+      },
+      {
+        "activity_type": "crossword",
+        "marks": 10,
+        "scale_to": 10,
+        "co_mapping": "CO5"
+      },
+      {
+        "activity_type": "assignment",
+        "marks": 10,
+        "scale_to": 0,
+        "co_mapping": "CO5"
+      }
+    ],
+    "tutorials": [
+      {
+        "tutorial_no": 1,
+        "activity": "Test on first chapter",
+        "marks": 10,
+        "scale_to": 4,
+        "co_mapping": "CO1"
+      },
+      {
+        "tutorial_no": 2,
+        "activity": "Quiz on relation",
+        "marks": 10,
+        "scale_to": 4,
+        "co_mapping": "CO2"
+      },
+      {
+        "tutorial_no": 3,
+        "activity": "Code of warshall algorithm",
+        "marks": 10,
+        "scale_to": 4,
+        "co_mapping": "CO2"
+      },
+      {
+        "tutorial_no": 4,
+        "activity": "Quiz on function",
+        "marks": 10,
+        "scale_to": 4,
+        "co_mapping": "CO2"
+      },
+      {
+        "tutorial_no": 5,
+        "activity": "Crossword",
+        "marks": 10,
+        "scale_to": 4,
+        "co_mapping": "CO3"
+      }
+    ]
+  },
+  "recommended_books": [
+    {
+      "id": "1",
+      "title": "Discrete Mathematics and its applications",
+      "author": "Rosen Kenneth",
+      "publisher": "McGraw Hill-New Delhi",
+      "type": "textbook"
+    },
+    {
+      "id": "2",
+      "title": "Elements of discrete mathematics: a Computer Oriented approach",
+      "author": "C.L.Liu, D.P.Mohapatra",
+      "publisher": "McGraw Hill-New Delhi",
+      "edition": "4th",
+      "type": "textbook"
+    },
+    {
+      "id": "3",
+      "title": "Discrete Mathematical Structures",
+      "author": "B.Kolman, R.Busby, S.Ross",
+      "publisher": "Pearson",
+      "edition": "6th",
+      "type": "reference"
+    },
+    {
+      "id": "5",
+      "title": "Statistics For Business And Economics",
+      "author": "David R. Anderson, Dennis J. Sweeney, Thomas A. Williams",
+      "publisher": "South-Western, Cengage Learning",
+      "edition": "11th",
+      "type": "textbook"
+    }
+  ],
+  "exit_survey": {
+    "questions": [
+      {
+        "co_id": "CO1",
+        "statement": "I can apply propositional and predicate logic to solve problems"
+      },
+      {
+        "co_id": "CO2",
+        "statement": "I can analyze relations and functions in various contexts"
+      },
+      {
+        "co_id": "CO3",
+        "statement": "I can classify algebraic structures and solve problems using them"
+      },
+      {
+        "co_id": "CO4",
+        "statement": "I can solve problems on sampling and normal distributions"
+      },
+      {
+        "co_id": "CO5",
+        "statement": "I can develop and test hypothesis about population parameters"
+      }
+    ]
+  },
+  "timetable": {
+    "raw_text": "Day | 8:45-9:45 | 9:45-10:45 | 11:00-12:00 | 12:00-13:00 | 13:30-14:30 | 14:30-15:30\nMonday | BSC12CS05 | CNS | - | NLP | - | Lab\nTuesday | - | BSC12CS05 | AI | - | Lab | Lab\nWednesday | BSC12CS05 | - | CNS | NLP | - | -\nThursday | - | AI | BSC12CS05 | - | Lab | Lab\nFriday | AI | BSC12CS05 | - | CNS | - | -",
+    "full_schedule": {
+      "Friday": [
+        {
+          "course": "AI",
+          "slot_index": 0,
+          "time": "8:45-9:45"
+        },
+        {
+          "course": "BSC12CS05",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        },
+        {
+          "course": "CNS",
+          "slot_index": 3,
+          "time": "12:00-13:00"
+        }
+      ],
+      "Monday": [
+        {
+          "course": "BSC12CS05",
+          "slot_index": 0,
+          "time": "8:45-9:45"
+        },
+        {
+          "course": "CNS",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        },
+        {
+          "course": "NLP",
+          "slot_index": 3,
+          "time": "12:00-13:00"
+        },
+        {
+          "course": "Lab",
+          "slot_index": 5,
+          "time": "14:30-15:30"
+        }
+      ],
+      "Saturday": [],
+      "Thursday": [
+        {
+          "course": "AI",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        },
+        {
+          "course": "BSC12CS05",
+          "slot_index": 2,
+          "time": "11:00-12:00"
+        },
+        {
+          "course": "Lab",
+          "slot_index": 4,
+          "time": "13:30-14:30"
+        },
+        {
+          "course": "Lab",
+          "slot_index": 5,
+          "time": "14:30-15:30"
+        }
+      ],
+      "Tuesday": [
+        {
+          "course": "BSC12CS05",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        },
+        {
+          "course": "AI",
+          "slot_index": 2,
+          "time": "11:00-12:00"
+        },
+        {
+          "course": "Lab",
+          "slot_index": 4,
+          "time": "13:30-14:30"
+        },
+        {
+          "course": "Lab",
+          "slot_index": 5,
+          "time": "14:30-15:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "course": "BSC12CS05",
+          "slot_index": 0,
+          "time": "8:45-9:45"
+        },
+        {
+          "course": "CNS",
+          "slot_index": 2,
+          "time": "11:00-12:00"
+        },
+        {
+          "course": "NLP",
+          "slot_index": 3,
+          "time": "12:00-13:00"
+        }
+      ]
+    },
+    "course_schedule": {
+      "course_code": "BSC12CS05",
+      "slots": [
+        {
+          "day": "Monday",
+          "slot_index": 0,
+          "time": "8:45-9:45"
+        },
+        {
+          "day": "Tuesday",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        },
+        {
+          "day": "Wednesday",
+          "slot_index": 0,
+          "time": "8:45-9:45"
+        },
+        {
+          "day": "Thursday",
+          "slot_index": 2,
+          "time": "11:00-12:00"
+        },
+        {
+          "day": "Friday",
+          "slot_index": 1,
+          "time": "9:45-10:45"
+        }
+      ],
+      "teaching_days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "total_hours_per_week": 5
+    },
+    "summary": "This course is taught on Monday, Tuesday, Wednesday, Thursday, Friday (5 hours/week)",
+    "last_updated": "2026-01-02T10:39:45.085198"
+  }
+}

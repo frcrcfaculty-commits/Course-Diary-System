@@ -1,0 +1,274 @@
+{
+    "course_info": {
+        "course_code": "CSL702",
+        "course_name": "Natural Language Processing",
+        "course_type": "theory",
+        "semester": "7",
+        "academic_year": "2025-26",
+        "faculty_name": "Dr. Jagruti Save",
+        "faculty_designation": "Professor and HOD",
+        "branch": "AI & DS",
+        "division": "A",
+        "batches": [
+            "A1",
+            "A2"
+        ]
+    },
+    "course_outcomes": [
+        {
+            "co_id": "CO1",
+            "statement": "Understand the fundamental concepts of Natural Language Processing and text preprocessing techniques",
+            "blooms_level": 2
+        },
+        {
+            "co_id": "CO2",
+            "statement": "Apply tokenization, stemming, lemmatization and POS tagging on text data",
+            "blooms_level": 3
+        },
+        {
+            "co_id": "CO3",
+            "statement": "Analyze text using statistical and neural network based language models",
+            "blooms_level": 4
+        },
+        {
+            "co_id": "CO4",
+            "statement": "Design and implement named entity recognition and information extraction systems",
+            "blooms_level": 5
+        },
+        {
+            "co_id": "CO5",
+            "statement": "Evaluate performance of NLP models using appropriate metrics and benchmarks",
+            "blooms_level": 5
+        }
+    ],
+    "co_po_mapping": [
+        {
+            "co": "CO1",
+            "po1": 3,
+            "po2": 2,
+            "po3": 1,
+            "po4": 0,
+            "po5": 2,
+            "po6": 0,
+            "po7": 0,
+            "po8": 0,
+            "po9": 0,
+            "po10": 0,
+            "po11": 0,
+            "po12": 1
+        },
+        {
+            "co": "CO2",
+            "po1": 3,
+            "po2": 3,
+            "po3": 2,
+            "po4": 1,
+            "po5": 3,
+            "po6": 0,
+            "po7": 0,
+            "po8": 0,
+            "po9": 0,
+            "po10": 0,
+            "po11": 0,
+            "po12": 2
+        },
+        {
+            "co": "CO3",
+            "po1": 3,
+            "po2": 3,
+            "po3": 3,
+            "po4": 2,
+            "po5": 3,
+            "po6": 0,
+            "po7": 1,
+            "po8": 0,
+            "po9": 0,
+            "po10": 0,
+            "po11": 0,
+            "po12": 2
+        },
+        {
+            "co": "CO4",
+            "po1": 3,
+            "po2": 3,
+            "po3": 3,
+            "po4": 3,
+            "po5": 3,
+            "po6": 1,
+            "po7": 1,
+            "po8": 0,
+            "po9": 1,
+            "po10": 0,
+            "po11": 0,
+            "po12": 2
+        },
+        {
+            "co": "CO5",
+            "po1": 3,
+            "po2": 3,
+            "po3": 2,
+            "po4": 2,
+            "po5": 3,
+            "po6": 0,
+            "po7": 1,
+            "po8": 0,
+            "po9": 1,
+            "po10": 0,
+            "po11": 0,
+            "po12": 2
+        }
+    ],
+    "lesson_plan": [
+        {
+            "sr_no": 1,
+            "proposed_date": "2026-01-06",
+            "topic": "Introduction to NLP, History and Applications",
+            "mode": "Lecture",
+            "cos": "CO1",
+            "assessments": "",
+            "books": "1",
+            "actual_date": "2026-01-06"
+        },
+        {
+            "sr_no": 2,
+            "proposed_date": "2026-01-08",
+            "topic": "Text Preprocessing: Tokenization",
+            "mode": "Lecture",
+            "cos": "CO1,CO2",
+            "assessments": "",
+            "books": "1,2",
+            "actual_date": "2026-01-08"
+        },
+        {
+            "sr_no": 3,
+            "proposed_date": "2026-01-10",
+            "topic": "Stemming and Lemmatization",
+            "mode": "Lecture",
+            "cos": "CO2",
+            "assessments": "",
+            "books": "1",
+            "actual_date": "2026-01-10"
+        },
+        {
+            "sr_no": 4,
+            "proposed_date": "2026-01-13",
+            "topic": "Regular Expressions for Text Processing",
+            "mode": "Lecture + Tutorial",
+            "cos": "CO2",
+            "assessments": "ISE1",
+            "books": "1,3",
+            "actual_date": "2026-01-13"
+        },
+        {
+            "sr_no": 5,
+            "proposed_date": "2026-01-15",
+            "topic": "Part-of-Speech Tagging: Rules-based",
+            "mode": "Lecture",
+            "cos": "CO2",
+            "assessments": "",
+            "books": "1,2",
+            "actual_date": "2026-01-15"
+        },
+        {
+            "sr_no": 6,
+            "proposed_date": "2026-01-17",
+            "topic": "POS Tagging: HMM and Viterbi Algorithm",
+            "mode": "Lecture",
+            "cos": "CO2,CO3",
+            "assessments": "",
+            "books": "1,2",
+            "actual_date": "2026-01-17"
+        },
+        {
+            "sr_no": 7,
+            "proposed_date": "2026-01-20",
+            "topic": "N-gram Language Models",
+            "mode": "Lecture",
+            "cos": "CO3",
+            "assessments": "",
+            "books": "1",
+            "actual_date": "2026-01-20"
+        },
+        {
+            "sr_no": 8,
+            "proposed_date": "2026-01-22",
+            "topic": "Smoothing Techniques for Language Models",
+            "mode": "Lecture",
+            "cos": "CO3",
+            "assessments": "ISE1",
+            "books": "1,2",
+            "actual_date": "2026-01-22"
+        }
+    ],
+    "assessments": {
+        "ise1": [
+            {
+                "name": "Quiz on Preprocessing",
+                "date": "2026-01-13",
+                "max_marks": 10
+            },
+            {
+                "name": "Assignment: Tokenizer Implementation",
+                "date": "2026-01-20",
+                "max_marks": 10
+            }
+        ],
+        "ise2": [],
+        "tutorials": [
+            {
+                "name": "Tutorial 1: Regex Practice",
+                "date": "2026-01-14",
+                "max_marks": 5
+            }
+        ]
+    },
+    "recommended_books": [
+        {
+            "id": "1",
+            "title": "Speech and Language Processing",
+            "author": "Daniel Jurafsky and James H. Martin",
+            "publisher": "Pearson",
+            "edition": "3rd Edition",
+            "type": "textbook"
+        },
+        {
+            "id": "2",
+            "title": "Natural Language Processing with Python",
+            "author": "Steven Bird, Ewan Klein, Edward Loper",
+            "publisher": "O'Reilly Media",
+            "edition": "1st Edition",
+            "type": "textbook"
+        },
+        {
+            "id": "3",
+            "title": "Foundations of Statistical Natural Language Processing",
+            "author": "Christopher Manning and Hinrich Schütze",
+            "publisher": "MIT Press",
+            "edition": "",
+            "type": "reference"
+        },
+        {
+            "id": "4",
+            "title": "Deep Learning for NLP",
+            "author": "Palash Goyal, Sumit Pandey",
+            "publisher": "Apress",
+            "edition": "2018",
+            "type": "reference"
+        }
+    ],
+    "exit_survey": {
+        "questions": [],
+        "responses": []
+    },
+    "timetable": {
+        "raw_text": "Day | 8:45-9:45 | 9:45-10:45 | 11:00-12:00\nMonday | CSL702 | CNS | -\nWednesday | - | CSL702 | AI\nFriday | CSL702 | - | CNS",
+        "course_schedule": {
+            "teaching_days": [
+                "Monday",
+                "Wednesday",
+                "Friday"
+            ],
+            "total_hours_per_week": 3
+        }
+    }
+}

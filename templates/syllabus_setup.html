@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Course - {{ course.course_info.course_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .setup-header {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+            color: white;
+            padding: 32px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .setup-header h1 {
+            margin: 0 0 8px 0;
+        }
+
+        .setup-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .setup-step {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .upload-zone {
+            border: 2px dashed #22c55e;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            margin: 16px 0;
+        }
+
+        .upload-zone input[type="file"] {
+            padding: 10px;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .results-panel {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .results-panel.active {
+            display: block;
+        }
+
+        .result-section {
+            margin-bottom: 20px;
+        }
+
+        .result-section h4 {
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .co-item,
+        .book-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .co-item .co-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blooms-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .book-type {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .book-type.textbook {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .book-type.reference {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .book-details {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .skip-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .skip-link a {
+            color: var(--text-muted);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('index') }}" class="logo">📚 Course Diary System</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Header -->
+        <div class="setup-header">
+            <h1>📄 Course Setup</h1>
+            <p><strong>{{ course.course_info.course_name }}</strong> ({{ course.course_info.course_code }})</p>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Upload your syllabus to automatically extract Course Outcomes
+                and Books</p>
+        </div>
+
+        <!-- Step 1: Upload Syllabus -->
+        <div class="setup-step">
+            <h2><span class="step-number">1</span> Upload Syllabus PDF</h2>
+            <p>Upload your syllabus document to automatically extract Course Outcomes and Recommended Books for course
+                code: <strong>{{ course.course_info.course_code }}</strong></p>
+
+            <div class="upload-zone">
+                <input type="file" id="syllabus-file" accept=".pdf,.txt">
+                <br><br>
+                <button class="btn btn-success" onclick="extractFromSyllabus()">📤 Extract Course Data</button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results-panel">
+                <!-- Course Outcomes Section -->
+                <div class="result-section">
+                    <h4>✅ Extracted Course Outcomes (<span id="co-count">0</span>)</h4>
+                    <div id="outcomes-list"></div>
+                </div>
+
+                <!-- Books Section -->
+                <div class="result-section">
+                    <h4>📚 Extracted Books (<span id="books-count">0</span>)</h4>
+                    <div id="books-list"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="actions-bar">
+                    <button class="btn btn-success" onclick="applyExtractedData()">✅ Apply All to Course</button>
+                    <button class="btn btn-secondary" onclick="clearResults()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Continue -->
+        <div class="setup-step">
+            <h2><span class="step-number">2</span> Continue to Course Editor</h2>
+            <p>After extracting data from syllabus, continue to the full course editor to add lesson plans, CO-PO
+                mappings, and more.</p>
+            <a href="{{ url_for('edit_course', filename=filename) }}" class="btn btn-primary">➡️ Continue to Course
+                Editor</a>
+        </div>
+
+        <!-- Skip Link -->
+        <div class="skip-link">
+            <a href="{{ url_for('edit_course', filename=filename) }}">Skip this step and go to Course Editor →</a>
+        </div>
+    </main>
+
+    <script>
+        const filename = '{{ filename }}';
+        const courseCode = '{{ course.course_info.course_code }}';
+
+        let extractedOutcomes = [];
+        let extractedBooks = [];
+
+        async function extractFromSyllabus() {
+            const fileInput = document.getElementById('syllabus-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a syllabus file first');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch(`/api/course/${filename}/parse-syllabus`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    extractedOutcomes = result.outcomes || [];
+                    extractedBooks = result.books || [];
+
+                    displayResults(result);
+                    document.getElementById('results-panel').classList.add('active');
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to parse syllabus'));
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        function displayResults(result) {
+            // Display Course Outcomes
+            document.getElementById('co-count').textContent = extractedOutcomes.length;
+            const outcomesHtml = extractedOutcomes.map(co => `
+                <div class="co-item">
+                    <div class="co-header">
+                        <strong>${co.co_id}</strong>
+                        <span class="blooms-badge">Bloom's Level ${co.blooms_level}</span>
+                    </div>
+                    <p style="margin: 8px 0 0 0; font-size: 0.9rem;">${co.statement}</p>
+                </div>
+            `).join('');
+            document.getElementById('outcomes-list').innerHTML = outcomesHtml || '<p>No outcomes extracted</p>';
+
+            // Display Books
+            document.getElementById('books-count').textContent = extractedBooks.length;
+            const booksHtml = extractedBooks.map(book => `
+                <div class="book-item">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <strong>${book.title}</strong>
+                        <span class="book-type ${book.type}">${book.type}</span>
+                    </div>
+                    <div class="book-details">
+                        ${book.author ? `👤 ${book.author}` : ''}
+                        ${book.publisher ? ` • 🏢 ${book.publisher}` : ''}
+                        ${book.edition ? ` • 📚 ${book.edition}` : ''}
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('books-list').innerHTML = booksHtml || '<p>No books extracted</p>';
+        }
+
+        async function applyExtractedData() {
+            try {
+                // Apply outcomes
+                if (extractedOutcomes.length > 0) {
+                    await fetch(`/api/course/${filename}/apply-outcomes`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ outcomes: extractedOutcomes, replace: true })
+                    });
+                }
+
+                // Apply books
+                if (extractedBooks.length > 0) {
+                    await fetch(`/api/course/${filename}/books`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ books: extractedBooks })
+                    });
+                }
+
+                alert(`✅ Applied ${extractedOutcomes.length} Course Outcomes and ${extractedBooks.length} Books to your course!`);
+                window.location.href = `/course/edit/${filename}`;
+            } catch (error) {
+                alert('Error applying data: ' + error.message);
+            }
+        }
+
+        function clearResults() {
+            extractedOutcomes = [];
+            extractedBooks = [];
+            document.getElementById('results-panel').classList.remove('active');
+            document.getElementById('syllabus-file').value = '';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Course Diary Schema",
+    "type": "object",
+    "required": [
+        "course_info",
+        "course_outcomes",
+        "lesson_plan"
+    ],
+    "properties": {
+        "course_info": {
+            "type": "object",
+            "required": [
+                "course_code",
+                "course_name",
+                "course_type",
+                "semester",
+                "academic_year",
+                "faculty_name"
+            ],
+            "properties": {
+                "course_code": {
+                    "type": "string",
+                    "description": "e.g., BSC12CS05, CSDO7011"
+                },
+                "course_name": {
+                    "type": "string"
+                },
+                "course_type": {
+                    "type": "string",
+                    "enum": [
+                        "theory",
+                        "lab",
+                        "theory_lab",
+                        "theory_tutorial"
+                    ]
+                },
+                "semester": {
+                    "type": "string"
+                },
+                "academic_year": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}$"
+                },
+                "faculty_name": {
+                    "type": "string"
+                },
+                "faculty_designation": {
+                    "type": "string"
+                },
+                "branch": {
+                    "type": "string"
+                },
+                "division": {
+                    "type": "string"
+                },
+                "batches": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "course_outcomes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "co_id",
+                    "statement"
+                ],
+                "properties": {
+                    "co_id": {
+                        "type": "string"
+                    },
+                    "statement": {
+                        "type": "string"
+                    },
+                    "blooms_level": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 6
+                    }
+                }
+            }
+        },
+        "co_po_mapping": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "co_id": {
+                        "type": "string"
+                    },
+                    "blooms_level": {
+                        "type": "string"
+                    },
+                    "performance_indicator": {
+                        "type": "string"
+                    },
+                    "po_mappings": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^PO([1-9]|1[0-2])$": {
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "minimum": 1,
+                                "maximum": 3
+                            }
+                        }
+                    },
+                    "pso_mappings": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^PSO\\d+$": {
+                                "type": [
+                                    "integer",
+                                    "null"
+                                ],
+                                "minimum": 1,
+                                "maximum": 3
+                            }
+                        }
+                    },
+                    "justification": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "lesson_plan": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "sr_no",
+                    "topic",
+                    "co_mapping"
+                ],
+                "properties": {
+                    "sr_no": {
+                        "type": "integer"
+                    },
+                    "proposed_date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "actual_date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "topic": {
+                        "type": "string"
+                    },
+                    "delivery_mode": {
+                        "type": "string"
+                    },
+                    "co_mapping": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "assessment_tool": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "reference_book": {
+                        "type": "string"
+                    },
+                    "teacher_remark": {
+                        "type": "string"
+                    },
+                    "hod_remark": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "lab_plan": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sr_no": {
+                        "type": "integer"
+                    },
+                    "experiment_title": {
+                        "type": "string"
+                    },
+                    "co_mapping": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "batch_schedule": {
+                        "type": "object",
+                        "patternProperties": {
+                            "^[A-Z]$": {
+                                "type": "object",
+                                "properties": {
+                                    "planned_date": {
+                                        "type": "string"
+                                    },
+                                    "actual_date": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "remark": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "assessments": {
+            "type": "object",
+            "properties": {
+                "ise1": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "activity_type": {
+                                "type": "string"
+                            },
+                            "marks": {
+                                "type": "integer"
+                            },
+                            "scale_to": {
+                                "type": "integer"
+                            },
+                            "co_mapping": {
+                                "type": "string"
+                            },
+                            "date": {
+                                "type": "string",
+                                "format": "date"
+                            }
+                        }
+                    }
+                },
+                "ise2": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "activity_type": {
+                                "type": "string"
+                            },
+                            "marks": {
+                                "type": "integer"
+                            },
+                            "scale_to": {
+                                "type": "integer"
+                            },
+                            "co_mapping": {
+                                "type": "string"
+                            },
+                            "date": {
+                                "type": "string",
+                                "format": "date"
+                            }
+                        }
+                    }
+                },
+                "tutorials": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "tutorial_no": {
+                                "type": "integer"
+                            },
+                            "activity": {
+                                "type": "string"
+                            },
+                            "marks": {
+                                "type": "integer"
+                            },
+                            "scale_to": {
+                                "type": "integer"
+                            },
+                            "co_mapping": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "examinations": {
+            "type": "object",
+            "properties": {
+                "mse": {
+                    "$ref": "#/definitions/exam_paper"
+                },
+                "ese": {
+                    "$ref": "#/definitions/exam_paper"
+                },
+                "special": {
+                    "$ref": "#/definitions/exam_paper"
+                }
+            }
+        },
+        "rubrics": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "experiment_no": {
+                        "type": "integer"
+                    },
+                    "aim": {
+                        "type": "string"
+                    },
+                    "co_mapping": {
+                        "type": "string"
+                    },
+                    "indicators": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "max_marks": {
+                                    "type": "integer"
+                                },
+                                "poor": {
+                                    "type": "string"
+                                },
+                                "average": {
+                                    "type": "string"
+                                },
+                                "good": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "exit_survey": {
+            "type": "object",
+            "properties": {
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "co_id": {
+                                "type": "string"
+                            },
+                            "statement": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "timestamp": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email"
+                            },
+                            "ratings": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "recommended_books": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "publisher": {
+                        "type": "string"
+                    },
+                    "edition": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "textbook",
+                            "reference"
+                        ]
+                    }
+                }
+            }
+        },
+        "useful_links": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "exam_paper": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "integer"
+                },
+                "max_marks": {
+                    "type": "integer"
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "question_no": {
+                                "type": "string"
+                            },
+                            "sub_question": {
+                                "type": "string"
+                            },
+                            "text": {
+                                "type": "string"
+                            },
+                            "marks": {
+                                "type": "integer"
+                            },
+                            "co_mapping": {
+                                "type": "string"
+                            },
+                            "blooms_level": {
+                                "type": "integer"
+                            },
+                            "performance_indicator": {
+                                "type": "string"
+                            },
+                            "has_or": {
+                                "type": "boolean"
+                            },
+                            "or_question": {
+                                "type": "string"
+                            },
+                            "solution": {
+                                "type": "string"
+                            },
+                            "marking_scheme": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

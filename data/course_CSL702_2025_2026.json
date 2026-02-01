@@ -1,0 +1,1186 @@
+{
+  "course_info": {
+    "course_code": "CSL702",
+    "course_name": "Big Data Analytics",
+    "course_type": "theory_lab",
+    "semester": "VII",
+    "academic_year": "2025-2026",
+    "faculty_name": "Prof. Hansal Gandhi",
+    "faculty_designation": "Assistant Professor",
+    "branch": "Artificial Intelligence and Data Science",
+    "division": "A,B,C",
+    "batches": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "course_outcomes": [
+    {
+      "co_id": "CO1",
+      "statement": "Understand the key issues in big data management and its associated applications for business decisions and strategy.",
+      "blooms_level": 2
+    },
+    {
+      "co_id": "CO2",
+      "statement": "Develop problem solving and critical thinking skills in fundamental enabling techniques like Hadoop, Map reduce and NoSQL in big data analytics.",
+      "blooms_level": 4
+    },
+    {
+      "co_id": "CO3",
+      "statement": "Collect, manage, store, query and analyze various forms of Big Data.",
+      "blooms_level": 4
+    },
+    {
+      "co_id": "CO4",
+      "statement": "Interpret business models and scientific computing paradigms, and apply software tools for big data analytics.",
+      "blooms_level": 3
+    },
+    {
+      "co_id": "CO5",
+      "statement": "Adapt adequate perspectives of big data analytics in various applications like recommender systems, social media applications etc.",
+      "blooms_level": 5
+    },
+    {
+      "co_id": "CO6",
+      "statement": "Solve Complex real world problems in various applications like recommender systems, social media applications, health and medical systems, etc.",
+      "blooms_level": 6
+    }
+  ],
+  "co_po_mapping": [
+    {
+      "co_id": "CO1",
+      "blooms_level": 2,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 1,
+        "PO11": 1,
+        "PO4": 1,
+        "PO5": 2
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Bloom level 2 (Understand) indicates understanding of fundamentals; PO11: Keywords matched: manage",
+      "ai_suggested": true,
+      "faculty_modified": false
+    },
+    {
+      "co_id": "CO2",
+      "blooms_level": 4,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 3,
+        "PO2": 3,
+        "PO3": 2,
+        "PO4": 1,
+        "PO5": 2
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Keywords matched: fundamental; PO2: Keywords matched: problem",
+      "ai_suggested": true,
+      "faculty_modified": false
+    },
+    {
+      "co_id": "CO3",
+      "blooms_level": 4,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 2,
+        "PO11": 1,
+        "PO2": 3,
+        "PO4": 1,
+        "PO5": 2
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Bloom level 4 (Analyze) indicates application of engineering knowledge; PO11: Keywords matched: manage",
+      "ai_suggested": true,
+      "faculty_modified": false
+    },
+    {
+      "co_id": "CO4",
+      "blooms_level": 3,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 2,
+        "PO3": 2,
+        "PO4": 2,
+        "PO5": 3
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Bloom level 3 (Apply) indicates application of engineering knowledge; PO3: Keywords matched: model | Design-oriented keywords detected",
+      "ai_suggested": true,
+      "faculty_modified": false
+    },
+    {
+      "co_id": "CO5",
+      "blooms_level": 5,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 2,
+        "PO12": 1,
+        "PO2": 2,
+        "PO3": 3,
+        "PO4": 1,
+        "PO5": 2,
+        "PO6": 1
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Bloom level 5 (Evaluate) indicates application of engineering knowledge; PO12: Keywords matched: adapt",
+      "ai_suggested": true,
+      "faculty_modified": false
+    },
+    {
+      "co_id": "CO6",
+      "blooms_level": 6,
+      "performance_indicator": "",
+      "po_mappings": {
+        "PO1": 2,
+        "PO2": 3,
+        "PO3": 3,
+        "PO4": 2,
+        "PO5": 2,
+        "PO6": 2
+      },
+      "justification": "AI-suggested mapping based on Bloom's level and keyword analysis. PO1: Bloom level 6 (Create) indicates application of engineering knowledge; PO2: Keywords matched: problem",
+      "ai_suggested": true,
+      "faculty_modified": false
+    }
+  ],
+  "lesson_plan": [
+    {
+      "sr_no": 1,
+      "proposed_date": "2025-06-11",
+      "topic": "Introduction to Big Data",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "1,2",
+      "actual_date": "2025-06-11"
+    },
+    {
+      "sr_no": 2,
+      "proposed_date": "2025-06-12",
+      "topic": "Big Data characteristics, types of Big Data",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-12"
+    },
+    {
+      "sr_no": 3,
+      "proposed_date": "2025-06-13",
+      "topic": "Traditional vs. Big Data business approach",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-13"
+    },
+    {
+      "sr_no": 4,
+      "proposed_date": "2025-06-18",
+      "topic": "Case Study of Big Data Solutions.",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-18"
+    },
+    {
+      "sr_no": 5,
+      "proposed_date": "2025-06-19",
+      "topic": "Concept of Hadoop",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-19"
+    },
+    {
+      "sr_no": 6,
+      "proposed_date": "2025-06-20",
+      "topic": "Core Hadoop Components; Hadoop Ecosystem",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-20"
+    },
+    {
+      "sr_no": 7,
+      "proposed_date": "2025-06-25",
+      "topic": "Distributed File Systems: Physical Organization of Compute Nodes",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-25"
+    },
+    {
+      "sr_no": 8,
+      "proposed_date": "2025-06-26",
+      "topic": "Large-Scale File-System Organization",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-26"
+    },
+    {
+      "sr_no": 9,
+      "proposed_date": "2025-06-27",
+      "topic": "MapReduce: The Map Tasks, Grouping by Key, The Reduce Tasks",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-06-27"
+    },
+    {
+      "sr_no": 10,
+      "proposed_date": "2025-07-02",
+      "topic": "Combiners, Details of MapReduce Execution, Coping With Node Failure",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-02"
+    },
+    {
+      "sr_no": 11,
+      "proposed_date": "2025-07-03",
+      "topic": "Algorithms Using MapReduce: Matrix-Vector Multiplication by MapReduce",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-03"
+    },
+    {
+      "sr_no": 12,
+      "proposed_date": "2025-07-04",
+      "topic": "Relational-Algebra Operations, Computing Selections by MapReduce, Computing Projections by MapReduce",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-04"
+    },
+    {
+      "sr_no": 13,
+      "proposed_date": "2025-07-09",
+      "topic": "Union, Intersection, and difference by MapReduce",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-09"
+    },
+    {
+      "sr_no": 14,
+      "proposed_date": "2025-07-10",
+      "topic": "Hadoop Limitations",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO2"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-10"
+    },
+    {
+      "sr_no": 15,
+      "proposed_date": "2025-07-11",
+      "topic": "Revision",
+      "delivery_mode": "Revision",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-11"
+    },
+    {
+      "sr_no": 16,
+      "proposed_date": "2025-07-16",
+      "topic": "ISE1",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-16"
+    },
+    {
+      "sr_no": 17,
+      "proposed_date": "2025-07-17",
+      "topic": "Introduction to NoSQL",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-17"
+    },
+    {
+      "sr_no": 18,
+      "proposed_date": "2025-07-18",
+      "topic": "NoSQL Business Drive",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-18"
+    },
+    {
+      "sr_no": 19,
+      "proposed_date": "2025-07-23",
+      "topic": "NoSQL Data Architecture Patterns: Key-value stores",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-23"
+    },
+    {
+      "sr_no": 20,
+      "proposed_date": "2025-07-24",
+      "topic": "Graph stores, Column family (Bigtable)stores",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-24"
+    },
+    {
+      "sr_no": 21,
+      "proposed_date": "2025-07-25",
+      "topic": "Document stores, Variations of NoSQL architectural patterns",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-25"
+    },
+    {
+      "sr_no": 22,
+      "proposed_date": "2025-07-30",
+      "topic": "Document stores, Variations of NoSQL architectural patterns",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-30"
+    },
+    {
+      "sr_no": 23,
+      "proposed_date": "2025-07-31",
+      "topic": "NoSQL Case Study",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-07-31"
+    },
+    {
+      "sr_no": 24,
+      "proposed_date": "2025-08-01",
+      "topic": "NoSQL Case Study",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-01"
+    },
+    {
+      "sr_no": 25,
+      "proposed_date": "2025-08-06",
+      "topic": "NoSQL Case Study",
+      "delivery_mode": "Revision",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-06"
+    },
+    {
+      "sr_no": 26,
+      "proposed_date": "2025-08-07",
+      "topic": "Revision",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-07"
+    },
+    {
+      "sr_no": 27,
+      "proposed_date": "2025-08-08",
+      "topic": "Revision",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-08"
+    },
+    {
+      "sr_no": 28,
+      "proposed_date": "2025-08-13",
+      "topic": "MSE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-13"
+    },
+    {
+      "sr_no": 29,
+      "proposed_date": "2025-08-14",
+      "topic": "MSE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-14"
+    },
+    {
+      "sr_no": 30,
+      "proposed_date": "2025-08-15",
+      "topic": "MSE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO1",
+        " CO2",
+        " CO3"
+      ],
+      "assessment_tool": [
+        "ISE1",
+        " MSE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-15"
+    },
+    {
+      "sr_no": 31,
+      "proposed_date": "2025-08-20",
+      "topic": "NoSQL solution for big data",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-20"
+    },
+    {
+      "sr_no": 32,
+      "proposed_date": "2025-08-21",
+      "topic": "Understanding the types of big data problems",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-21"
+    },
+    {
+      "sr_no": 33,
+      "proposed_date": "2025-08-22",
+      "topic": "Analyzing big data with a shared-nothing architecture",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-22"
+    },
+    {
+      "sr_no": 34,
+      "proposed_date": "2025-08-27",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-27"
+    },
+    {
+      "sr_no": 35,
+      "proposed_date": "2025-08-28",
+      "topic": "Choosing distribution models: master-slave versus peer-to-peer",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-28"
+    },
+    {
+      "sr_no": 36,
+      "proposed_date": "2025-08-29",
+      "topic": "NoSQL systems to handle big data problems",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-08-29"
+    },
+    {
+      "sr_no": 37,
+      "proposed_date": "2025-09-03",
+      "topic": "Peer-to-Peer",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-03"
+    },
+    {
+      "sr_no": 38,
+      "proposed_date": "2025-09-04",
+      "topic": "Four ways that NoSQL systems handle big data problems",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO3"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-04"
+    },
+    {
+      "sr_no": 39,
+      "proposed_date": "2025-09-05",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-05"
+    },
+    {
+      "sr_no": 40,
+      "proposed_date": "2025-09-10",
+      "topic": "The Stream Data Model: A Data-Stream-Management System",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-10"
+    },
+    {
+      "sr_no": 41,
+      "proposed_date": "2025-09-11",
+      "topic": "Examples of Stream Sources",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-11"
+    },
+    {
+      "sr_no": 42,
+      "proposed_date": "2025-09-12",
+      "topic": "Stream Queries",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-12"
+    },
+    {
+      "sr_no": 43,
+      "proposed_date": "2025-09-17",
+      "topic": "ssues in Stream Processing",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-17"
+    },
+    {
+      "sr_no": 44,
+      "proposed_date": "2025-09-18",
+      "topic": "Sampling Data techniques in a Stream",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-18"
+    },
+    {
+      "sr_no": 45,
+      "proposed_date": "2025-09-19",
+      "topic": "Filtering Streams: Bloom Filter with Analysis",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-19"
+    },
+    {
+      "sr_no": 46,
+      "proposed_date": "2025-09-24",
+      "topic": "Counting Distinct Elements in a Stream",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-24"
+    },
+    {
+      "sr_no": 47,
+      "proposed_date": "2025-09-25",
+      "topic": "Count-Distinct Problem",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-25"
+    },
+    {
+      "sr_no": 48,
+      "proposed_date": "2025-09-26",
+      "topic": "Flajolet-Martin Algorithm",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-09-26"
+    },
+    {
+      "sr_no": 49,
+      "proposed_date": "2025-10-01",
+      "topic": "Combining Estimates, Space Requirements",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-01"
+    },
+    {
+      "sr_no": 50,
+      "proposed_date": "2025-10-02",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-02"
+    },
+    {
+      "sr_no": 51,
+      "proposed_date": "2025-10-03",
+      "topic": "Counting Frequent Items in a Stream",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-03"
+    },
+    {
+      "sr_no": 52,
+      "proposed_date": "2025-10-08",
+      "topic": "Sampling Methods for Streams",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-08"
+    },
+    {
+      "sr_no": 53,
+      "proposed_date": "2025-10-09",
+      "topic": "Frequent Itemsets in Decaying Windows",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-09"
+    },
+    {
+      "sr_no": 54,
+      "proposed_date": "2025-10-10",
+      "topic": "Counting Ones in a Window: The Cost of Exact Counts",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-10"
+    },
+    {
+      "sr_no": 55,
+      "proposed_date": "2025-10-15",
+      "topic": "The Datar-Gionis-Indyk-Motwani Algorithm",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-15"
+    },
+    {
+      "sr_no": 56,
+      "proposed_date": "2025-10-16",
+      "topic": "Query Answering in the DGIM algorithm, Decaying Windows.",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-16"
+    },
+    {
+      "sr_no": 57,
+      "proposed_date": "2025-10-17",
+      "topic": "Distance Measures: Definition of a Distance Measure, Euclidean Distances, Jaccard Distance, Cosine Distance, Edit Distance, Hamming Distance",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-17"
+    },
+    {
+      "sr_no": 58,
+      "proposed_date": "2025-10-22",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-22"
+    },
+    {
+      "sr_no": 59,
+      "proposed_date": "2025-10-23",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-23"
+    },
+    {
+      "sr_no": 60,
+      "proposed_date": "2025-10-24",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-24"
+    },
+    {
+      "sr_no": 61,
+      "proposed_date": "2025-10-29",
+      "topic": "ISC2",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO4",
+        " CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-29"
+    },
+    {
+      "sr_no": 62,
+      "proposed_date": "2025-10-30",
+      "topic": "CURE Algorithm, Stream-Computing , A Stream-Clustering Algorithm, Initializing & Merging Buckets, Answering Queries",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-30"
+    },
+    {
+      "sr_no": 63,
+      "proposed_date": "2025-10-31",
+      "topic": "PageRank Overview, Efficient computation of PageRank: PageRank Iteration Using MapReduce, Use of Combiners to Consolidate the Result Vector.",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO5"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-10-31"
+    },
+    {
+      "sr_no": 64,
+      "proposed_date": "2025-11-03",
+      "topic": "A Model for Recommendation Systems,Content-Based Recommendations, Collaborative Filtering",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO6"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-11-03"
+    },
+    {
+      "sr_no": 65,
+      "proposed_date": "2025-11-04",
+      "topic": "ESE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO4",
+        " CO5",
+        " CO6"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-11-04"
+    },
+    {
+      "sr_no": 66,
+      "proposed_date": "2025-11-05",
+      "topic": "HOLIDAY",
+      "delivery_mode": "Lecture",
+      "co_mapping": [
+        "CO4",
+        " CO5",
+        " CO6"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-11-05"
+    },
+    {
+      "sr_no": 67,
+      "proposed_date": "2025-11-06",
+      "topic": "ESE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO4",
+        " CO5",
+        " CO6"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-11-06"
+    },
+    {
+      "sr_no": 68,
+      "proposed_date": "2025-11-07",
+      "topic": "ESE",
+      "delivery_mode": "Quiz",
+      "co_mapping": [
+        "CO4",
+        " CO5",
+        " CO6"
+      ],
+      "assessment_tool": [
+        "ISC2",
+        " ESE"
+      ],
+      "reference_book": "",
+      "actual_date": "2025-11-07"
+    }
+  ],
+  "assessments": {
+    "ise1": [],
+    "ise2": [],
+    "tutorials": []
+  },
+  "recommended_books": [],
+  "exit_survey": {
+    "questions": [],
+    "responses": []
+  }
+}
