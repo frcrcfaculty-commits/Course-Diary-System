@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Diary Automation System</title>
+    <title>Course Diary System | Fr. C.R.C.E.</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
@@ -12,8 +12,15 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <h1 class="logo">📚 Course Diary System</h1>
-                <p class="institution">{{ institution.name }}</p>
+                <div class="logo-section">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Fr. C.R.C.E. Logo"
+                        class="college-logo">
+                    <div class="logo-text">
+                        <h1 class="logo">Course Diary System</h1>
+                        <p class="institution">Fr. Conceicao Rodrigues College of Engineering</p>
+                        <p class="address">Bandra (W), Mumbai - 400 050</p>
+                    </div>
+                </div>
             </div>
         </div>
     </header>

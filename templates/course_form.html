@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if mode == 'new' %}Create{% else %}Edit{% endif %} Course - Course Diary System</title>
+    <title>{% if mode == 'new' %}Create{% else %}Edit{% endif %} Course | Fr. C.R.C.E.</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
@@ -12,7 +12,10 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="{{ url_for('index') }}" class="logo">📚 Course Diary System</a>
+                <a href="{{ url_for('index') }}" class="logo-section">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="college-logo">
+                    <span class="logo">Course Diary System</span>
+                </a>
             </div>
         </div>
     </header>

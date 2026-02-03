@@ -1,13 +1,15 @@
-/* Course Diary Automation System - Styles */
+/* Course Diary System - Fr. Conceicao Rodrigues College of Engineering */
 
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #64748b;
+    --primary: #7B1113;
+    /* Maroon/Burgundy */
+    --primary-dark: #5a0c0e;
+    --secondary: #C9A227;
+    /* Gold accent */
     --success: #22c55e;
     --danger: #ef4444;
     --warning: #f59e0b;
-    --bg: #f8fafc;
+    --bg: #faf8f5;
     --bg-card: #ffffff;
     --text: #1e293b;
     --text-muted: #64748b;
@@ -39,7 +41,7 @@ body {
 .header {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
-    padding: 20px 0;
+    padding: 16px 0;
     box-shadow: var(--shadow);
 }
 
@@ -49,16 +51,44 @@ body {
     align-items: center;
 }
 
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.college-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: white;
+    padding: 4px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: white;
     text-decoration: none;
+    margin-bottom: 2px;
 }
 
 .institution {
-    font-size: 0.9rem;
-    opacity: 0.9;
+    font-size: 0.85rem;
+    opacity: 0.95;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.address {
+    font-size: 0.75rem;
+    opacity: 0.8;
 }
 
 /* Dashboard */
