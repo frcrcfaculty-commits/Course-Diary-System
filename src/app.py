@@ -17,6 +17,16 @@ CONFIG_PATH = os.path.join(BASE_PATH, 'config')
 DATA_PATH = os.path.join(BASE_PATH, 'data')
 OUTPUT_PATH = os.path.join(BASE_PATH, 'output')
 
+# On Vercel the code directory is read-only: work on a /tmp copy of the
+# bundled course data, refreshed from the repo on each cold start.
+if os.environ.get('VERCEL'):
+    import shutil
+    _bundled = DATA_PATH
+    DATA_PATH = '/tmp/course_diary/data'
+    OUTPUT_PATH = '/tmp/course_diary/output'
+    if not os.path.isdir(DATA_PATH):
+        shutil.copytree(_bundled, DATA_PATH, copy_function=shutil.copyfile)
+
 # Ensure directories exist
 os.makedirs(DATA_PATH, exist_ok=True)
 os.makedirs(OUTPUT_PATH, exist_ok=True)

@@ -1,0 +1,3 @@
+# Legacy-format duplicate of course_CSL702_2025_2026.json; its old schema
+# breaks the timetable page and document export, so keep it out of the demo.
+data/course_CSL702_2025_26.json
